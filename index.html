@@ -100,78 +100,48 @@
           </p>
         </div>
 
-        <!-- Glassmorphism Panel -->
-        <div class="ai-tools-panel">
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #10a37f;">GPT</div>
-            <div class="tool-info">
-              <h3>ChatGPT</h3>
-              <p>Conversational AI</p>
+        <!-- NEW BENTO GRID PANEL -->
+        <div class="bento-grid-panel">
+          <!-- Main Hero Card -->
+          <div class="bento-card bento-hero">
+            <div class="bento-content">
+              <span class="bento-tag">Featured</span>
+              <h3>ChatGPT 4o</h3>
+              <p>The smartest AI assistant, now faster and multi-modal.</p>
+              <div class="bento-visual" style="background: linear-gradient(135deg, #10a37f 0%, #0d8c6c 100%);">GPT-4o
+              </div>
             </div>
           </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #ffffff; color: #000;">MJ</div>
-            <div class="tool-info">
-              <h3>Midjourney</h3>
-              <p>Image Generation</p>
+
+          <!-- Stats/Info Card -->
+          <div class="bento-card bento-stats">
+            <h3>1,200+</h3>
+            <p>AI Tools Indexed</p>
+          </div>
+
+          <!-- New/Trending Card -->
+          <div class="bento-card bento-trending">
+            <span class="bento-label">TRENDING</span>
+            <div class="mini-tool-list">
+              <div class="mini-tool">
+                <div class="mini-icon orange">MJ</div>
+                <span>Midjourney V6</span>
+              </div>
+              <div class="mini-tool">
+                <div class="mini-icon blue">D3</div>
+                <span>DALL·E 3</span>
+              </div>
+              <div class="mini-tool">
+                <div class="mini-icon purple">SD</div>
+                <span>Stable Diffusion</span>
+              </div>
             </div>
           </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #ff6b6b;">JS</div>
-            <div class="tool-info">
-              <h3>Jasper</h3>
-              <p>Writing Assistant</p>
-            </div>
-          </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #007aff;">D3</div>
-            <div class="tool-info">
-              <h3>DALL·E 3</h3>
-              <p>OpenAI Images</p>
-            </div>
-          </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #8e44ad;">SD</div>
-            <div class="tool-info">
-              <h3>Stable Diffusion</h3>
-              <p>Open Source Art</p>
-            </div>
-          </div>
-          <!-- Additional Cards for Scroll -->
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #da7756;">CL</div>
-            <div class="tool-info">
-              <h3>Claude 3</h3>
-              <p>Anthropic AI</p>
-            </div>
-          </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #000000;">RW</div>
-            <div class="tool-info">
-              <h3>Runway</h3>
-              <p>Video Generation</p>
-            </div>
-          </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #ffffff; color: #000;">MJ6</div>
-            <div class="tool-info">
-              <h3>Midjourney V6</h3>
-              <p>Ultra Realistic</p>
-            </div>
-          </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #4285f4;">GM</div>
-            <div class="tool-info">
-              <h3>Gemini</h3>
-              <p>Google AI</p>
-            </div>
-          </div>
-          <div class="ai-tool-card">
-            <div class="tool-icon" style="background: #24292e;">GH</div>
-            <div class="tool-info">
-              <h3>GitHub Copilot</h3>
-              <p>Code Assistant</p>
-            </div>
+
+          <!-- Action Card -->
+          <div class="bento-card bento-action">
+            <h3>Submit Tool</h3>
+            <div class="action-icon">+</div>
           </div>
         </div>
       </div>
@@ -226,16 +196,7 @@
     }, 4000);
   </script>
   <script>
-    // Scroll Isolation for AI Tools Panel
-    const panel = document.querySelector('.ai-tools-panel');
-    if (panel) {
-      panel.addEventListener('mouseenter', () => {
-        document.body.classList.add('no-scroll');
-      });
-      panel.addEventListener('mouseleave', () => {
-        document.body.classList.remove('no-scroll');
-      });
-    }
+
   </script>
 </body>
 

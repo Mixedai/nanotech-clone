@@ -1,24 +1,24 @@
 import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+import { initCursor } from './components/cursor.js'
+import { initHero } from './components/hero.js'
+import { initProjects } from './components/projects.js'
+import { initBentoGrid } from './components/bento.js'
 
-setupCounter(document.querySelector('#counter'))
+gsap.registerPlugin(ScrollTrigger);
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Init Custom Cursor
+  initCursor();
+
+  // Init Hero Animations
+  initHero();
+
+  // Init Project List Logic
+  initProjects();
+
+  // Init AI Bento Grid Logic (Parallax)
+  initBentoGrid();
+});
