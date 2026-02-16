@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nanotech - Creative Portfolio</title>
+</head>
+
+<body>
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="20" height="20" fill="white" />
+        <rect x="20" y="10" width="10" height="10" fill="#666" />
+      </svg>
+    </div>
+
+    <!-- Menu Toggle (Burger) -->
+    <div class="menu-toggle" onclick="document.querySelector('.menu-overlay').classList.add('open')">
+      <div style="width: 30px; height: 2px; background: white; margin-bottom: 6px;"></div>
+      <div style="width: 30px; height: 2px; background: white; margin-bottom: 6px;"></div>
+      <div style="width: 20px; height: 2px; background: white; margin-left: auto;"></div>
+    </div>
+
+    <a href="#" class="btn-talk">Let's Talk</a>
+  </header>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-text">Hang tight, magic is happening...</div>
+  </div>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay">
+    <div class="menu-close" onclick="document.querySelector('.menu-overlay').classList.remove('open')">Close X</div>
+    <nav class="menu-nav">
+      <a href="#">Index</a>
+      <a href="#">Projects</a>
+      <a href="#">Agency</a>
+      <a href="#">Resources</a>
+    </nav>
+  </div>
+
+  <!-- FIXED BACKGROUNDS CONTAINER -->
+  <div id="project-backgrounds">
+    <!-- 1: Digital Art - Abstract Dark Fluid -->
+    <div class="project-bg"
+      style="background-image: url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2674&auto=format&fit=crop');">
+    </div>
+
+    <!-- 2: Photography - Moody Portrait/Landscape -->
+    <div class="project-bg"
+      style="background-image: url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=2670&auto=format&fit=crop');">
+    </div>
+
+    <!-- 3: Development - Tech/Cyber -->
+    <div class="project-bg"
+      style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2670&auto=format&fit=crop');">
+    </div>
+
+    <!-- 4: Design - Clean Architectural -->
+    <div class="project-bg"
+      style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop');">
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT SCROLL WRAPPER -->
+  <div id="main-content">
+
+    <!-- HERO SECTION (Opaque BG) -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Creative<br>Design Agency</h1>
+        <p class="hero-subtitle">We create digital experiences that<br>people love to use.</p>
+      </div>
+
+      <div class="hero-bottom-bar">
+        <span>SCROLL DOWN</span>
+        <span>EST 2024</span>
+      </div>
+    </section>
+
+    <!-- PROJECT LIST (Transparent BG) -->
+    <section class="project-list-section">
+      <div class="project-title-item">
+        <h2 class="project-title-text">The Invincibles</h2>
+        <p class="project-category">Digital Art</p>
+      </div>
+      <div class="project-title-item">
+        <h2 class="project-title-text">Provenance</h2>
+        <p class="project-category">Photography</p>
+      </div>
+      <div class="project-title-item">
+        <h2 class="project-title-text">Unbreak</h2>
+        <p class="project-category">Development</p>
+      </div>
+      <div class="project-title-item">
+        <h2 class="project-title-text">Better Off</h2>
+        <p class="project-category">Design</p>
+      </div>
+    </section>
+
+    <!-- FOOTER (Opaque BG) -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <h2 class="hero-title" style="font-size: 3rem;">Let's Work Together</h2>
+        <div style="margin-top: 30px; display: flex; gap: 20px; color: #777;">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script type="module" src="/main.js"></script>
+
+  <!-- Force Preloader Removal -->
+  <script>
+    window.addEventListener('load', () => {
+      const pre = document.getElementById('preloader');
+      if (pre) {
+        setTimeout(() => {
+          pre.style.opacity = '0';
+          setTimeout(() => pre.style.display = 'none', 1000);
+        }, 1000); // 1s delay
+      }
+    });
+    // Fallback
+    setTimeout(() => {
+      const pre = document.getElementById('preloader');
+      if (pre && pre.style.opacity !== '0') {
+        pre.style.opacity = '0';
+        setTimeout(() => pre.style.display = 'none', 1000);
+      }
+    }, 4000);
+  </script>
+</body>
+
+</html>

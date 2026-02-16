@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #0b0b0b;
+  /* Dark Mode */
+  --text-color: #ffffff;
+  --secondary-text: #999;
+  --accent-color: #fff;
+  --cursor-size: 20px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+  cursor: none;
+  /* Custom cursor */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: none;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  mix-blend-mode: difference;
+}
+
+/* Layout Layers */
+#main-content {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+}
+
+/* HEADER */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+.logo rect {
+  fill: #fff !important;
+}
+
+.menu-toggle {
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.btn-talk {
+  border: 1px solid #fff;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 500;
+}
+
+/* FIXED BACKGROUND CONTAINER */
+#project-backgrounds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  /* Lowest visible */
+  pointer-events: none;
+  background: #0b0b0b;
+  /* Fallback */
+}
+
+.project-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+/* HERO */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  background-color: var(--bg-color);
+  /* Opaque to hide bg initially */
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--secondary-text);
+}
+
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--secondary-text);
+}
+
+/* PROJECT LIST - Transparent to show fixed BGs */
+.project-list-section {
+  position: relative;
+  z-index: 5;
+  background: transparent;
+  padding-bottom: 20vh;
+}
+
+.project-title-item {
+  min-height: 80vh;
+  /* This spacing is KEY for the scroll effect */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: opacity 0.5s ease;
+}
+
+/* Active State handled by JS */
+.project-title-item.active {
+  opacity: 1;
+}
+
+.project-title-text {
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  /* Optional: Stroke effect/Outline if needed, but solid white is Nanotech style */
+}
+
+.project-category {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: var(--secondary-text);
+}
+
+/* FOOTER */
+.site-footer {
+  min-height: 60vh;
+  background: var(--bg-color);
+  /* Opaque */
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+/* UTILS: Menu Overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.menu-nav a {
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 700;
+  display: block;
+  margin: 10px 0;
+  transition: opacity 0.3s;
+}
+
+.menu-nav a:hover {
+  opacity: 0.5;
+}
+
+.menu-close {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 2001;
+  /* Above overlay */
+}
+
+/* Preloader */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: opacity 1s ease;
+}
