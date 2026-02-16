@@ -128,6 +128,54 @@ a {
   margin-bottom: 20px;
 }
 
+.highlight-oo {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.lens {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  border: 4px solid #00ffff;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), inset 0 0 10px rgba(0, 255, 255, 0.3);
+  color: transparent;
+  font-size: 0.8em;
+  position: relative;
+  margin: 0 2px;
+}
+
+/* Add glare/reflection */
+.lens::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 25%;
+  height: 25%;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.9), transparent 70%);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.bridge {
+  width: 15px;
+  height: 4px;
+  background: #00ffff;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+  margin: 0 -2px;
+  position: relative;
+  top: -5px;
+  z-index: 1;
+}
+
 .hero-subtitle {
   font-size: 1.2rem;
   color: var(--secondary-text);
@@ -165,6 +213,83 @@ a {
   transition: opacity 0.5s ease;
 }
 
+/* Discover Section Split Layout */
+.project-title-item.discover-section {
+  flex-direction: row;
+  /* Side by side on desktop */
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  gap: 50px;
+  text-align: left;
+}
+
+.discover-text-content {
+  flex: 1;
+}
+
+/* AI Tools Board (Glassmorphism) */
+.ai-tools-panel {
+  flex: 1;
+  max-width: 500px;
+  max-height: 60vh;
+  margin-top: 190px;
+  /* ~5cm total offset */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Scroll isolation */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.ai-tool-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 15px;
+  border-radius: 12px;
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+}
+
+.ai-tool-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.tool-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: white;
+}
+
+.tool-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.tool-info p {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+  margin: 0;
+}
+
 /* Active State handled by JS */
 .project-title-item.active {
   opacity: 1;
@@ -182,6 +307,25 @@ a {
   font-size: 1.5rem;
   margin-top: 10px;
   color: var(--secondary-text);
+}
+
+/* Responsive Panel */
+@media (max-width: 1024px) {
+  .project-title-item.discover-section {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    padding: 0 20px;
+  }
+
+  .project-category {
+    text-align: center !important;
+  }
+
+  .ai-tools-panel {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* FOOTER */
@@ -254,4 +398,11 @@ a {
   color: #fff;
   font-size: 1.5rem;
   transition: opacity 1s ease;
+}
+
+/* Scroll Lock */
+body.no-scroll {
+  overflow: hidden !important;
+  height: 100vh;
+  touch-action: none;
 }
