@@ -11,6 +11,8 @@ export function initLearn() {
 
   _initScrollAnimations(section);
   _initDragScroll(section);
+  _initCarouselNav(section);
+  _initProgressBar(section);
 }
 
 // --- Scroll Entrance Animations ---
@@ -19,6 +21,7 @@ function _initScrollAnimations(section) {
   const desc = section.querySelector('.learn-desc');
   const viewAll = section.querySelector('.learn-view-all');
   const cards = section.querySelectorAll('.course-card');
+  const nav = section.querySelector('.carousel-nav');
 
   if (!title) return;
 
@@ -31,35 +34,45 @@ function _initScrollAnimations(section) {
   });
 
   tl.from(title, {
-    y: -30,
+    y: 40,
     opacity: 0,
-    duration: 0.6,
+    duration: 0.7,
     ease: 'power4.out',
   });
 
   if (desc) {
     tl.from(desc, {
-      y: 20,
+      y: 30,
       opacity: 0,
-      duration: 0.4,
+      duration: 0.5,
       ease: 'power3.out',
-    }, '-=0.3');
+    }, '-=0.4');
   }
 
   if (viewAll) {
     tl.from(viewAll, {
+      x: -20,
       opacity: 0,
-      duration: 0.3,
-    }, '-=0.2');
+      duration: 0.4,
+    }, '-=0.3');
   }
 
   if (cards.length > 0) {
     tl.from(cards, {
-      x: 60,
+      x: 80,
       opacity: 0,
-      duration: 0.7,
-      stagger: 0.15,
+      duration: 0.8,
+      stagger: 0.12,
       ease: 'power4.out',
+    }, '-=0.4');
+  }
+
+  if (nav) {
+    tl.from(nav, {
+      y: 20,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power3.out',
     }, '-=0.3');
   }
 }
@@ -94,4 +107,43 @@ function _initDragScroll(section) {
     const walk = (x - startX) * 1.5;
     carousel.scrollLeft = scrollLeft - walk;
   });
+}
+
+// --- Arrow Navigation ---
+function _initCarouselNav(section) {
+  const carousel = section.querySelector('.learn-carousel');
+  const prevBtn = section.querySelector('.carousel-prev');
+  const nextBtn = section.querySelector('.carousel-next');
+  if (!carousel || !prevBtn || !nextBtn) return;
+
+  const scrollAmount = 344; // card width + gap
+
+  prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+}
+
+// --- Progress Bar ---
+function _initProgressBar(section) {
+  const carousel = section.querySelector('.learn-carousel');
+  const progressBar = section.querySelector('.carousel-progress-bar');
+  if (!carousel || !progressBar) return;
+
+  const updateProgress = () => {
+    const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+    if (scrollWidth <= 0) {
+      progressBar.style.width = '100%';
+      return;
+    }
+    const progress = (carousel.scrollLeft / scrollWidth) * 100;
+    const barWidth = Math.max(20, Math.min(100, 20 + progress * 0.8));
+    progressBar.style.width = `${barWidth}%`;
+  };
+
+  carousel.addEventListener('scroll', updateProgress);
+  updateProgress();
 }
