@@ -5,7 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { initCursor } from './components/cursor.js'
 import { initHero } from './components/hero.js'
 import { initProjects } from './components/projects.js'
-import { initBentoGrid } from './components/bento.js'
+import { initDiscover } from './components/discover.js'
+import { initLightSwitch } from './components/light-switch.js'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,9 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Init Hero Animations
   initHero();
 
+  // Init Light Switch
+  initLightSwitch();
+
   // Init Project List Logic
   initProjects();
 
-  // Init AI Bento Grid Logic (Parallax)
-  initBentoGrid();
+  // Init Discover Section (Particles + Glassmorphism)
+  initDiscover();
 });
