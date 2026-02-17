@@ -8,6 +8,7 @@ import { initProjects } from './components/projects.js'
 import { initDiscover } from './components/discover.js'
 import { initLearn } from './components/learn.js'
 import { initUseThem } from './components/use-them.js'
+import { initEvolve } from './components/evolve.js'
 import { initLightSwitch } from './components/light-switch.js'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,4 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init Use Them Section (Floating Dashboard)
   initUseThem();
+
+  // Init Evolve Section (AI Skill Tree)
+  initEvolve();
 });
