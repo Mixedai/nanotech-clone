@@ -7,6 +7,7 @@ import { initHero } from './components/hero.js'
 import { initProjects } from './components/projects.js'
 import { initDiscover } from './components/discover.js'
 import { initLearn } from './components/learn.js'
+import { initUseThem } from './components/use-them.js'
 import { initLightSwitch } from './components/light-switch.js'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,4 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init Learn Section (Course Carousel)
   initLearn();
+
+  // Init Use Them Section (Floating Dashboard)
+  initUseThem();
 });
