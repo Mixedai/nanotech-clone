@@ -13,7 +13,6 @@ export function initDiscover() {
   _initParticles(section);
   _initScrollAnimations(section);
   _initCardTilt(section);
-  _initCounter(section);
   _initGlowTracking(section);
 }
 
@@ -35,8 +34,9 @@ function _initParticles(section) {
 // --- Scroll Entrance Animations ---
 function _initScrollAnimations(section) {
   const title = section.querySelector('.discover-title');
-  const pill = section.querySelector('.discover-pill');
-  const cards = section.querySelectorAll('.glass-card');
+  const desc = section.querySelector('.discover-desc');
+  const cta = section.querySelector('.discover-cta');
+  const card = section.querySelector('.glass-card');
 
   if (!title) return;
 
@@ -48,37 +48,45 @@ function _initScrollAnimations(section) {
     },
   });
 
+  // Left side: text animations
   tl.from(title, {
-    y: -40,
+    x: -60,
     opacity: 0,
-    duration: 0.6,
+    duration: 0.7,
     ease: 'power4.out',
   });
 
-  if (pill) {
-    tl.from(pill, {
-      scale: 0.8,
+  if (desc) {
+    tl.from(desc, {
+      x: -40,
       opacity: 0,
-      duration: 0.4,
-      ease: 'back.out(1.7)',
-    }, '-=0.3');
+      duration: 0.5,
+      ease: 'power3.out',
+    }, '-=0.4');
   }
 
-  if (cards.length > 0) {
-    tl.from(cards, {
-      y: 80,
+  if (cta) {
+    tl.from(cta, {
+      y: 20,
       opacity: 0,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: 'power4.out',
+      duration: 0.4,
+      ease: 'power3.out',
     }, '-=0.2');
   }
 
-  // Parallax: cards move at different speeds
-  cards.forEach((card, i) => {
-    const speed = 30 + i * 20;
+  // Right side: card animation
+  if (card) {
+    tl.from(card, {
+      x: 80,
+      opacity: 0,
+      rotation: 3,
+      duration: 0.8,
+      ease: 'power4.out',
+    }, '-=0.6');
+
+    // Parallax on card
     gsap.to(card, {
-      y: -speed,
+      y: -60,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
@@ -87,12 +95,11 @@ function _initScrollAnimations(section) {
         scrub: 1,
       },
     });
-  });
+  }
 }
 
 // --- 3D Card Tilt ---
 function _initCardTilt(section) {
-  // Disable on touch devices
   if ('ontouchstart' in window) return;
 
   const cards = section.querySelectorAll('.glass-card');
@@ -119,31 +126,7 @@ function _initCardTilt(section) {
   });
 }
 
-// --- Animated Counter ---
-function _initCounter(section) {
-  const counter = section.querySelector('.stats-counter');
-  if (!counter) return;
-
-  const target = parseInt(counter.dataset.target, 10);
-
-  ScrollTrigger.create({
-    trigger: counter,
-    start: 'top 80%',
-    once: true,
-    onEnter: () => {
-      gsap.to({ val: 0 }, {
-        val: target,
-        duration: 2,
-        ease: 'power2.out',
-        onUpdate: function () {
-          counter.textContent = Math.floor(this.targets()[0].val).toLocaleString() + '+';
-        },
-      });
-    },
-  });
-}
-
-// --- Glow follows mouse on cards ---
+// --- Glow follows mouse on card ---
 function _initGlowTracking(section) {
   if ('ontouchstart' in window) return;
 
