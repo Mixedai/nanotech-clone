@@ -10,18 +10,21 @@ export function initUseThem() {
   if (!section) return;
 
   _initScrollAnimations(section);
-  _initDashboardParallax(section);
 }
 
 // --- Scroll Entrance Animations ---
 function _initScrollAnimations(section) {
   const title = section.querySelector('.use-them-title');
-  const desc = section.querySelector('.use-them-desc');
-  const cta = section.querySelector('.use-them-cta');
-  const mockup = section.querySelector('.dashboard-mockup');
-  const sidebarTools = section.querySelectorAll('.dash-tool');
-  const promptBar = section.querySelector('.dash-prompt-bar');
-  const statCards = section.querySelectorAll('.dash-stat-card');
+  const subtitle = section.querySelector('.use-them-subtitle');
+  const splitContainer = section.querySelector('.use-them-split');
+  const promptSide = section.querySelector('.split-prompt');
+  const resultSide = section.querySelector('.split-result');
+  const dividerIcon = section.querySelector('.divider-icon');
+  const terminal = section.querySelector('.prompt-terminal');
+  const toolTags = section.querySelectorAll('.prompt-tool-tag');
+  const resultWindow = section.querySelector('.result-window');
+  const codeLines = section.querySelectorAll('.code-line');
+  const resultMeta = section.querySelector('.result-meta');
 
   if (!title) return;
 
@@ -33,87 +36,91 @@ function _initScrollAnimations(section) {
     },
   });
 
-  // Left side
+  // Header
   tl.from(title, {
-    x: -60,
+    y: 30,
     opacity: 0,
-    duration: 0.7,
+    duration: 0.6,
     ease: 'power4.out',
   });
 
-  if (desc) {
-    tl.from(desc, {
-      x: -40,
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power3.out',
-    }, '-=0.4');
-  }
-
-  if (cta) {
-    tl.from(cta, {
+  if (subtitle) {
+    tl.from(subtitle, {
       y: 20,
       opacity: 0,
       duration: 0.4,
       ease: 'power3.out',
+    }, '-=0.3');
+  }
+
+  // Split container
+  if (splitContainer) {
+    tl.from(splitContainer, {
+      y: 40,
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power3.out',
     }, '-=0.2');
   }
 
-  // Right side: dashboard
-  if (mockup) {
-    tl.from(mockup, {
-      x: 100,
+  // Left side: prompt terminal
+  if (terminal) {
+    tl.from(terminal, {
+      x: -30,
       opacity: 0,
-      rotation: 3,
-      duration: 0.8,
-      ease: 'power4.out',
-    }, '-=0.6');
+      duration: 0.5,
+      ease: 'power3.out',
+    }, '-=0.3');
   }
 
-  // Dashboard inner elements stagger
-  if (sidebarTools.length > 0) {
-    tl.from(sidebarTools, {
-      x: -20,
+  if (toolTags.length > 0) {
+    tl.from(toolTags, {
+      y: 10,
       opacity: 0,
       duration: 0.3,
       stagger: 0.08,
       ease: 'power3.out',
-    }, '-=0.4');
-  }
-
-  if (promptBar) {
-    tl.from(promptBar, {
-      y: 15,
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power3.out',
     }, '-=0.2');
   }
 
-  if (statCards.length > 0) {
-    tl.from(statCards, {
-      y: 20,
+  // Divider icon
+  if (dividerIcon) {
+    tl.from(dividerIcon, {
+      scale: 0,
       opacity: 0,
-      duration: 0.3,
-      stagger: 0.1,
+      duration: 0.4,
+      ease: 'back.out(2)',
+    }, '-=0.3');
+  }
+
+  // Right side: result window
+  if (resultWindow) {
+    tl.from(resultWindow, {
+      x: 30,
+      opacity: 0,
+      duration: 0.5,
       ease: 'power3.out',
+    }, '-=0.3');
+  }
+
+  // Code lines stagger
+  if (codeLines.length > 0) {
+    tl.from(codeLines, {
+      x: 15,
+      opacity: 0,
+      duration: 0.2,
+      stagger: 0.06,
+      ease: 'power2.out',
     }, '-=0.2');
   }
-}
 
-// --- Scroll Parallax on Dashboard ---
-function _initDashboardParallax(section) {
-  const mockup = section.querySelector('.dashboard-mockup');
-  if (!mockup) return;
-
-  gsap.to(mockup, {
-    y: -50,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: section,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1,
-    },
-  });
+  // Result meta
+  if (resultMeta) {
+    tl.from(resultMeta, {
+      y: 10,
+      opacity: 0,
+      duration: 0.3,
+      ease: 'power3.out',
+    }, '-=0.1');
+  }
 }

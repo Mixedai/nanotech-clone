@@ -262,83 +262,71 @@
           </div>
         </div>
       </div>
-      <!-- USE THEM SECTION — Floating Dashboard -->
+      <!-- USE THEM SECTION — Prompt → Result Split Screen -->
       <div class="project-title-item use-them-section">
-        <div class="use-them-content">
-          <!-- Left: Text -->
-          <div class="use-them-text">
-            <h2 class="use-them-title">USE THEM</h2>
-            <p class="use-them-desc">Bring all your AI tools into one workspace. Write prompts, get results, track everything.</p>
-            <a href="#" class="use-them-cta">Open Workspace →</a>
+        <!-- Section Header -->
+        <div class="use-them-header">
+          <h2 class="use-them-title">USE THEM</h2>
+          <p class="use-them-subtitle">One prompt. Infinite possibilities.</p>
+        </div>
+
+        <!-- Split Screen -->
+        <div class="use-them-split">
+          <!-- Left: Prompt Side (Dark) -->
+          <div class="split-prompt">
+            <div class="prompt-terminal">
+              <div class="terminal-header">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-label">prompt</span>
+              </div>
+              <div class="terminal-body">
+                <span class="terminal-prefix">→</span>
+                <span class="terminal-text">Write me a landing page for an AI startup with a dark theme, hero animation, and pricing section</span>
+                <span class="terminal-cursor">|</span>
+              </div>
+            </div>
+            <div class="prompt-tools">
+              <span class="prompt-tool-tag" style="--tag-color: #10a37f;">ChatGPT</span>
+              <span class="prompt-tool-tag" style="--tag-color: #7c3aed;">Claude</span>
+              <span class="prompt-tool-tag" style="--tag-color: #4285f4;">Gemini</span>
+            </div>
           </div>
 
-          <!-- Right: Dashboard Mockup -->
-          <div class="use-them-visual">
-            <div class="dashboard-mockup">
-              <!-- Window Bar -->
-              <div class="dash-window-bar">
-                <div class="dash-traffic-lights">
-                  <span class="dot dot-red"></span>
-                  <span class="dot dot-yellow"></span>
-                  <span class="dot dot-green"></span>
-                </div>
-                <span class="dash-window-title">AI Workspace</span>
-                <div class="dash-window-actions">
-                  <span>☰</span>
+          <!-- Center Divider -->
+          <div class="split-divider">
+            <div class="divider-line"></div>
+            <div class="divider-icon">⚡</div>
+            <div class="divider-line"></div>
+          </div>
+
+          <!-- Right: Result Side (Gradient) -->
+          <div class="split-result">
+            <div class="result-window">
+              <div class="result-header">
+                <span class="result-dot result-dot-red"></span>
+                <span class="result-dot result-dot-yellow"></span>
+                <span class="result-dot result-dot-green"></span>
+                <span class="result-label">output</span>
+              </div>
+              <div class="result-body">
+                <div class="result-code">
+                  <div class="code-line"><span class="code-tag">&lt;section</span> <span class="code-attr">class</span>=<span class="code-string">"hero"</span><span class="code-tag">&gt;</span></div>
+                  <div class="code-line code-indent"><span class="code-tag">&lt;h1&gt;</span><span class="code-text">Build with AI</span><span class="code-tag">&lt;/h1&gt;</span></div>
+                  <div class="code-line code-indent"><span class="code-tag">&lt;p&gt;</span><span class="code-text">The future is here</span><span class="code-tag">&lt;/p&gt;</span></div>
+                  <div class="code-line"><span class="code-tag">&lt;/section&gt;</span></div>
+                  <div class="code-line"></div>
+                  <div class="code-line"><span class="code-tag">&lt;section</span> <span class="code-attr">class</span>=<span class="code-string">"pricing"</span><span class="code-tag">&gt;</span></div>
+                  <div class="code-line code-indent"><span class="code-comment">// AI-generated pricing cards</span></div>
+                  <div class="code-line"><span class="code-tag">&lt;/section&gt;</span></div>
                 </div>
               </div>
-
-              <!-- Dashboard Body -->
-              <div class="dash-body">
-                <!-- Sidebar -->
-                <div class="dash-sidebar">
-                  <div class="dash-tool active" data-tool="chatgpt">
-                    <div class="dash-tool-icon" style="background: #10a37f;">C</div>
-                  </div>
-                  <div class="dash-tool" data-tool="midjourney">
-                    <div class="dash-tool-icon" style="background: #7c3aed;">M</div>
-                  </div>
-                  <div class="dash-tool" data-tool="gemini">
-                    <div class="dash-tool-icon" style="background: #4285f4;">G</div>
-                  </div>
-                  <div class="dash-tool" data-tool="elevenlabs">
-                    <div class="dash-tool-icon" style="background: #f59e0b;">E</div>
-                  </div>
-                  <div class="dash-tool" data-tool="notion">
-                    <div class="dash-tool-icon" style="background: #e11d48;">N</div>
-                  </div>
-                </div>
-
-                <!-- Main Area -->
-                <div class="dash-main">
-                  <p class="dash-greeting">Good morning! What would you like to create today?</p>
-                  <div class="dash-prompt-bar">
-                    <span class="dash-prompt-icon">💬</span>
-                    <span class="dash-prompt-placeholder">Write a prompt...</span>
-                  </div>
-                  <div class="dash-stats">
-                    <div class="dash-stat-card">
-                      <span class="dash-stat-value">1.2K</span>
-                      <span class="dash-stat-label">Tasks</span>
-                    </div>
-                    <div class="dash-stat-card">
-                      <span class="dash-stat-value">47</span>
-                      <span class="dash-stat-label">Tools</span>
-                    </div>
-                    <div class="dash-stat-card">
-                      <span class="dash-stat-value">98%</span>
-                      <span class="dash-stat-label">Score</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Bottom Bar -->
-              <div class="dash-bottom-bar">
-                <span class="dash-recent-item">✓ Blog Post</span>
-                <span class="dash-recent-item">✓ Image Gen</span>
-                <span class="dash-recent-item dash-recent-pending">● Code Review</span>
-              </div>
+            </div>
+            <div class="result-meta">
+              <span class="result-stat">↗ 2,847 tokens</span>
+              <span class="result-stat">● 3.2s</span>
+              <span class="result-stat result-stat-success">✓ Complete</span>
             </div>
           </div>
         </div>
