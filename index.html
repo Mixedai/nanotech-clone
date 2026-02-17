@@ -87,67 +87,69 @@
       </div>
     </section>
 
+    <!-- SEPARATOR SECTION (Fixed Background) -->
+    <section class="separator-section">
+      <div class="separator-content">
+        <h2>THE FUTURE IS NOW</h2>
+      </div>
+    </section>
+
     <!-- PROJECT LIST (Transparent BG) -->
     <section class="project-list-section">
-      <!-- DISCOVER SECTION with AI Tools Panel -->
+      <!-- DISCOVER SECTION — Glassmorphism + Particles -->
       <div class="project-title-item discover-section">
-        <div class="discover-text-content">
-          <h2 class="project-title-text">DISCOVER</h2>
-          <p class="project-category"
-            style="font-size: 1.2rem; max-width: 600px; line-height: 1.6; margin-top: 40px; text-align: left;">
-            Browse through 1.000+ AI tools with advanced search and smart filters.<br>
-            Find exactly what you need in seconds.
-          </p>
-        </div>
+        <canvas class="particle-canvas"></canvas>
 
-        <!-- NEW BENTO GRID PANEL -->
-        <div class="bento-grid-panel">
-          <!-- Main Hero Card -->
-          <div class="bento-card bento-hero">
-            <div class="bento-content">
-              <span class="bento-tag">Featured</span>
-              <h3>ChatGPT 4o</h3>
-              <p>The smartest AI assistant, now faster and multi-modal.</p>
-              <div class="bento-visual" style="background: linear-gradient(135deg, #10a37f 0%, #0d8c6c 100%);">GPT-4o
+        <div class="discover-content">
+          <div class="discover-header">
+            <h2 class="discover-title">DISCOVER</h2>
+            <div class="discover-pill">Browse 1,000+ AI Tools with smart filters</div>
+          </div>
+
+          <div class="discover-showcase">
+            <!-- Featured Card (span 2) -->
+            <div class="glass-card glass-featured" data-glow="#10a37f">
+              <span class="glass-badge">Featured</span>
+              <div class="glass-card-body">
+                <div class="glass-icon" style="background: #10a37f;">GPT</div>
+                <div>
+                  <h3>ChatGPT 4o</h3>
+                  <p>The smartest AI assistant — faster, multi-modal, and more creative than ever.</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Stats/Info Card -->
-          <div class="bento-card bento-stats">
-            <h3>1,200+</h3>
-            <p>AI Tools Indexed</p>
-          </div>
+            <!-- Tool Card -->
+            <div class="glass-card glass-tool" data-glow="#FF6D1F">
+              <div class="glass-icon" style="background: #FF6D1F;">MJ</div>
+              <h3>Midjourney V6</h3>
+              <span class="glass-tag">Image Generation</span>
+            </div>
 
-          <!-- New/Trending Card -->
-          <div class="bento-card bento-trending">
-            <span class="bento-label">TRENDING</span>
-            <div class="mini-tool-list">
-              <div class="mini-tool">
-                <div class="mini-icon orange">MJ</div>
-                <span>Midjourney V6</span>
-              </div>
-              <div class="mini-tool">
-                <div class="mini-icon blue">D3</div>
-                <span>DALL·E 3</span>
-              </div>
-              <div class="mini-tool">
-                <div class="mini-icon purple">SD</div>
-                <span>Stable Diffusion</span>
+            <!-- Stats Card -->
+            <div class="glass-card glass-stats" data-glow="#00d4ff">
+              <h3 class="stats-counter" data-target="1200">0</h3>
+              <p>AI Tools Indexed</p>
+            </div>
+
+            <!-- Categories Card (span 2) -->
+            <div class="glass-card glass-categories" data-glow="#9b59b6">
+              <span class="glass-label">CATEGORIES</span>
+              <div class="category-chips">
+                <span class="chip" style="--chip-color: #FF6D1F;">Image</span>
+                <span class="chip" style="--chip-color: #3498db;">Code</span>
+                <span class="chip" style="--chip-color: #e74c3c;">Video</span>
+                <span class="chip" style="--chip-color: #2ecc71;">Audio</span>
+                <span class="chip" style="--chip-color: #9b59b6;">Writing</span>
+                <span class="chip" style="--chip-color: #f39c12;">Research</span>
               </div>
             </div>
-          </div>
-
-          <!-- Action Card -->
-          <div class="bento-card bento-action">
-            <h3>Submit Tool</h3>
-            <div class="action-icon">+</div>
           </div>
         </div>
       </div>
       <div class="project-title-item">
-        <h2 class="project-title-text">Provenance</h2>
-        <p class="project-category">Photography</p>
+        <h2 class="project-title-text">LEARN</h2>
+        <p class="project-category">How to use AI Tools</p>
       </div>
       <div class="project-title-item">
         <h2 class="project-title-text">Unbreak</h2>
