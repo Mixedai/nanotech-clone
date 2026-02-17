@@ -357,7 +357,7 @@
         <!-- Skill Tree -->
         <div class="skill-tree-container">
           <!-- Center Node -->
-          <div class="tree-center-node">
+          <div class="tree-center-node" data-tooltip="Your AI journey starts here">
             <div class="node-icon">⚡</div>
             <span class="node-label">AI Fundamentals</span>
           </div>
@@ -365,13 +365,18 @@
           <!-- Branch: Top-Left — Prompt Writing → Advanced Prompting -->
           <div class="tree-branch branch-tl">
             <div class="tree-line"></div>
-            <div class="tree-node unlocked">
+            <div class="tree-node unlocked"
+              data-tooltip="Master prompt engineering techniques"
+              data-tools="ChatGPT, Claude, Gemini"
+              data-progress="85">
               <div class="node-icon">✍️</div>
               <span class="node-label">Prompt Writing</span>
               <span class="node-desc">Craft perfect prompts</span>
             </div>
             <div class="tree-line"></div>
-            <div class="tree-node locked">
+            <div class="tree-node locked"
+              data-tooltip="Complete prerequisites to unlock"
+              data-required="750 XP">
               <div class="node-icon">🔒</div>
               <span class="node-label">Advanced Prompting</span>
             </div>
@@ -380,13 +385,18 @@
           <!-- Branch: Top-Right — Image Generation → Video & 3D -->
           <div class="tree-branch branch-tr">
             <div class="tree-line"></div>
-            <div class="tree-node unlocked">
+            <div class="tree-node unlocked"
+              data-tooltip="Generate stunning images with AI"
+              data-tools="Midjourney, DALL-E, Stable Diffusion"
+              data-progress="72">
               <div class="node-icon">🎨</div>
               <span class="node-label">Image Generation</span>
               <span class="node-desc">Create stunning visuals</span>
             </div>
             <div class="tree-line"></div>
-            <div class="tree-node locked">
+            <div class="tree-node locked"
+              data-tooltip="Complete prerequisites to unlock"
+              data-required="750 XP">
               <div class="node-icon">🔒</div>
               <span class="node-label">Video & 3D</span>
             </div>
@@ -395,13 +405,18 @@
           <!-- Branch: Bottom-Left — Code Assist → Full Automation -->
           <div class="tree-branch branch-bl">
             <div class="tree-line"></div>
-            <div class="tree-node unlocked">
+            <div class="tree-node unlocked"
+              data-tooltip="Supercharge your development workflow"
+              data-tools="GitHub Copilot, Cursor, Claude Code"
+              data-progress="90">
               <div class="node-icon">💻</div>
               <span class="node-label">Code Assist</span>
               <span class="node-desc">10x your coding speed</span>
             </div>
             <div class="tree-line"></div>
-            <div class="tree-node locked">
+            <div class="tree-node locked"
+              data-tooltip="Complete prerequisites to unlock"
+              data-required="750 XP">
               <div class="node-icon">🔒</div>
               <span class="node-label">Full Automation</span>
             </div>
@@ -410,13 +425,18 @@
           <!-- Branch: Bottom-Right — Data Analysis → AI Strategy -->
           <div class="tree-branch branch-br">
             <div class="tree-line"></div>
-            <div class="tree-node unlocked">
+            <div class="tree-node unlocked"
+              data-tooltip="Transform data into insights"
+              data-tools="ChatGPT, Julius AI, Pandas AI"
+              data-progress="65">
               <div class="node-icon">📊</div>
               <span class="node-label">Data Analysis</span>
               <span class="node-desc">Insights in seconds</span>
             </div>
             <div class="tree-line"></div>
-            <div class="tree-node locked">
+            <div class="tree-node locked"
+              data-tooltip="Complete prerequisites to unlock"
+              data-required="750 XP">
               <div class="node-icon">🔒</div>
               <span class="node-label">AI Strategy</span>
             </div>
@@ -436,6 +456,29 @@
           <div class="evolve-stat">
             <span class="stat-number">12</span>
             <span class="stat-label">Tools Mastered</span>
+          </div>
+        </div>
+
+        <!-- Tooltip -->
+        <div class="node-tooltip" id="evolve-tooltip">
+          <span class="tooltip-text"></span>
+        </div>
+
+        <!-- Node Detail Panel -->
+        <div class="node-detail-panel" id="node-detail">
+          <button class="detail-close">&times;</button>
+          <div class="detail-icon"></div>
+          <h3 class="detail-title"></h3>
+          <p class="detail-desc"></p>
+          <div class="detail-tools">
+            <span class="detail-tools-label">Tools:</span>
+            <div class="detail-tools-list"></div>
+          </div>
+          <div class="detail-progress-wrap">
+            <div class="detail-progress-bar">
+              <div class="detail-progress-fill"></div>
+            </div>
+            <span class="detail-progress-text"></span>
           </div>
         </div>
       </div>
