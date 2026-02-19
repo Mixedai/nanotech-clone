@@ -31,5 +31,8 @@ initial-load
 modal-detail
 projects-section-scroll
 
+# Firebase
+firebase-debug.log
+
 # Claude Code
 .claude/
