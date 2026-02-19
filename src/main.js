@@ -1,6 +1,7 @@
-import './style.css'
+import '../style.css'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from 'lenis'
 
 import { initCursor } from './components/cursor.js'
 import { initHero } from './components/hero.js'
@@ -11,17 +12,20 @@ import { initUseThem } from './components/use-them.js'
 import { initEvolve } from './components/evolve.js'
 import { initLightSwitch } from './components/light-switch.js'
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Lenis smooth scroll + GSAP ScrollTrigger integration
+  const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
   // Init Custom Cursor
   initCursor();
 
   // Init Hero Animations
   initHero();
-
-  // Init Light Switch
-  initLightSwitch();
 
   // Init Project List Logic
   initProjects();
@@ -37,4 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init Evolve Section (AI Skill Tree)
   initEvolve();
+
+  // Init Light Switch (Dark/Light Toggle)
+  initLightSwitch();
 });

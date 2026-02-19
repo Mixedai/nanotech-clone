@@ -75,20 +75,29 @@
 
     <!-- HERO SECTION (Opaque BG) -->
     <section class="hero-section">
+      <div class="hero-spotlight"></div>
+
       <div class="hero-content">
-        <h1 class="hero-title">AI<br>T<span class="highlight-oo"><span class="lens">O</span><span
-              class="bridge"></span><span class="lens">O</span></span>LOGIST</h1>
+        <h1 class="hero-title">
+          <span class="title-line"><span class="title-line-inner">AI</span></span>
+          <span class="title-line"><span class="title-line-inner">T<span class="highlight-oo"><span class="lens">O</span><span class="bridge"></span><span class="lens">O</span></span>LOGIST</span></span>
+        </h1>
         <p class="hero-subtitle">Discover and become master of<br>AI Tools.</p>
+        <a href="#discover" class="hero-cta">Explore Tools →</a>
       </div>
 
       <div class="hero-bottom-bar">
-        <span>SCROLL DOWN</span>
+        <div class="scroll-indicator">
+          <svg class="scroll-chevron" width="20" height="12" viewBox="0 0 20 12" fill="none">
+            <path d="M2 2L10 10L18 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
         <span>EST 2024</span>
       </div>
     </section>
 
     <!-- SEPARATOR SECTION (Fixed Background) -->
-    <section class="separator-section">
+    <section class="separator-section" data-lenis-prevent>
       <div class="separator-content">
         <h2>THE FUTURE IS NOW</h2>
       </div>
@@ -498,7 +507,7 @@
 
   </div>
 
-  <script type="module" src="/main.js"></script>
+  <script type="module" src="/src/main.js"></script>
 
   <!-- Force Preloader Removal -->
   <script>

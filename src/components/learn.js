@@ -10,9 +10,61 @@ export function initLearn() {
   if (!section) return;
 
   _initScrollAnimations(section);
+  _initParallax(section);
   _initDragScroll(section);
   _initCarouselNav(section);
   _initProgressBar(section);
+}
+
+function _initParallax(section) {
+  const mm = gsap.matchMedia();
+
+  mm.add('(min-width: 768px)', () => {
+    const title = section.querySelector('.learn-title');
+    const circle1 = section.querySelector('.learn-circle-1');
+    const circle2 = section.querySelector('.learn-circle-2');
+
+    if (title) {
+      gsap.to(title, {
+        y: -40,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      });
+    }
+
+    if (circle1) {
+      gsap.to(circle1, {
+        y: 100,
+        x: -30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 2,
+        },
+      });
+    }
+
+    if (circle2) {
+      gsap.to(circle2, {
+        y: -80,
+        x: 20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 2,
+        },
+      });
+    }
+  });
 }
 
 // --- Scroll Entrance Animations ---

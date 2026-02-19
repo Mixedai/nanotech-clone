@@ -96,6 +96,43 @@ function _initScrollAnimations(section) {
       },
     });
   }
+
+  _initParallaxLayers(section);
+}
+
+function _initParallaxLayers(section) {
+  const mm = gsap.matchMedia();
+
+  mm.add('(min-width: 768px)', () => {
+    const title = section.querySelector('.discover-title');
+    const desc = section.querySelector('.discover-desc');
+
+    if (title) {
+      gsap.to(title, {
+        y: -30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    }
+
+    if (desc) {
+      gsap.to(desc, {
+        y: -15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    }
+  });
 }
 
 // --- 3D Card Tilt ---

@@ -10,9 +10,59 @@ export function initEvolve() {
   if (!section) return;
 
   _initScrollAnimations(section);
+  _initParallax(section);
   _initTooltips(section);
   _initNodeClicks(section);
   _initLineEnergy(section);
+}
+
+function _initParallax(section) {
+  const mm = gsap.matchMedia();
+
+  mm.add('(min-width: 768px)', () => {
+    const header = section.querySelector('.evolve-header');
+    const treeContainer = section.querySelector('.skill-tree-container');
+    const stats = section.querySelector('.evolve-stats');
+
+    if (header) {
+      gsap.to(header, {
+        y: -50,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      });
+    }
+
+    if (treeContainer) {
+      gsap.to(treeContainer, {
+        y: -25,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    }
+
+    if (stats) {
+      gsap.to(stats, {
+        y: -10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 0.8,
+        },
+      });
+    }
+  });
 }
 
 // --- Scroll Entrance Animations ---
