@@ -10,6 +10,7 @@ import { initDiscover } from './components/discover.js'
 import { initLearn } from './components/learn.js'
 import { initUseThem } from './components/use-them.js'
 import { initEvolve } from './components/evolve.js'
+import { initBento } from './components/bento.js'
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -40,4 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init Evolve Section (AI Skill Tree)
   initEvolve();
+
+  // Init Bento Features Grid
+  initBento();
 });
