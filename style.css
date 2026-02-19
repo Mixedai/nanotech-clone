@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import './src/components/separator.css';
 
 :root {
@@ -137,7 +136,13 @@ a {
 
 .title-line-inner {
   display: block;
+  transform: translateY(110%);
 }
+
+/* Prevent CLS: hide elements before GSAP animates them */
+.site-header { opacity: 0; transform: translateY(-50px); }
+.hero-cta { opacity: 0; transform: translateY(20px); }
+.hero-bottom-bar > * { opacity: 0; transform: translateY(20px); }
 
 .highlight-oo {
   display: inline-flex;
@@ -1312,7 +1317,7 @@ a {
   align-items: center;
   padding: 80px 60px;
   gap: 50px;
-  background: linear-gradient(180deg, #0a0a12 0%, #150d04 50%, #0a0a12 100%);
+  background: linear-gradient(180deg, #0b0b0b 0%, #0e0e12 50%, #0b0b0b 100%);
   position: relative;
   overflow: hidden;
   min-height: 100vh;
@@ -1325,7 +1330,7 @@ a {
   width: 900px;
   height: 900px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(251, 191, 36, 0.04) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 70%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1339,7 +1344,7 @@ a {
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
   top: 30%;
   left: 20%;
   transform: translate(-50%, -50%);
@@ -1362,24 +1367,11 @@ a {
   gap: 12px;
 }
 
-.evolve-level-badge {
-  display: inline-block;
-  padding: 6px 18px;
-  border: 1px solid rgba(245, 158, 11, 0.4);
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #f59e0b;
-  letter-spacing: 0.15em;
-  background: rgba(245, 158, 11, 0.08);
-  text-transform: uppercase;
-}
-
 .evolve-title {
   font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 700;
   line-height: 1;
-  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 40%, #f59e0b 80%);
+  background: linear-gradient(135deg, #ffffff 0%, #cccccc 40%, #ffffff 80%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1395,7 +1387,7 @@ a {
 
 .evolve-subtitle {
   font-size: clamp(0.9rem, 2vw, 1.2rem);
-  color: rgba(245, 158, 11, 0.6);
+  color: rgba(255, 255, 255, 0.6);
   margin-top: 4px;
   letter-spacing: 0.05em;
 }
@@ -1404,7 +1396,7 @@ a {
 .evolve-xp-bar {
   width: 280px;
   height: 8px;
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -1414,9 +1406,9 @@ a {
 .xp-fill {
   width: 82%;
   height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  background: linear-gradient(90deg, #ffffff, #cccccc);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
   position: relative;
 }
 
@@ -1442,7 +1434,7 @@ a {
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.6rem;
-  color: rgba(245, 158, 11, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   white-space: nowrap;
   letter-spacing: 0.05em;
 }
@@ -1460,7 +1452,7 @@ a {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: rgba(245, 158, 11, 0.4);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   animation: float-particle 8s ease-in-out infinite;
 }
@@ -1477,6 +1469,113 @@ a {
   10% { opacity: 0.6; }
   50% { transform: translateY(-40px) translateX(20px); opacity: 0.4; }
   90% { opacity: 0.6; }
+}
+
+/* Evolve Content Layout — Profile + Tree side by side */
+.evolve-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Mini Profile Card */
+.evolve-profile-card {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 30px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  text-align: center;
+}
+
+.profile-avatar {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-icon {
+  font-size: 2.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  animation: avatar-pulse 3s ease-in-out infinite;
+}
+
+@keyframes avatar-pulse {
+  0%, 100% { border-color: rgba(255, 255, 255, 0.35); transform: scale(1); }
+  50% { border-color: rgba(255, 255, 255, 0.6); transform: scale(1.06); }
+}
+
+.profile-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #cccccc;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.profile-role {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: -8px;
+}
+
+.profile-bio {
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  justify-content: center;
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.profile-stat-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.profile-stat-label {
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 /* Skill Tree Container — 3D Perspective */
@@ -1505,7 +1604,7 @@ a {
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  border: 1px solid rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   pointer-events: none;
   transform: translate(-50%, -50%);
 }
@@ -1519,7 +1618,7 @@ a {
   width: 620px;
   height: 620px;
   border-style: dashed;
-  border-color: rgba(245, 158, 11, 0.04);
+  border-color: rgba(255, 255, 255, 0.04);
 }
 
 /* Center Node */
@@ -1534,16 +1633,16 @@ a {
   margin-top: -60px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #1a1508, #0f0d08);
-  border: 2px solid #f59e0b;
+  border: 2px solid #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 4px;
   box-shadow:
-    0 0 40px rgba(245, 158, 11, 0.4),
-    0 0 80px rgba(245, 158, 11, 0.15),
-    inset 0 0 25px rgba(245, 158, 11, 0.06);
+    0 0 40px rgba(255, 255, 255, 0.4),
+    0 0 80px rgba(255, 255, 255, 0.15),
+    inset 0 0 25px rgba(255, 255, 255, 0.06);
   z-index: 5;
   animation: amber-pulse 3s ease-in-out infinite;
   cursor: pointer;
@@ -1561,7 +1660,7 @@ a {
 
 .tree-center-node .node-label {
   font-size: 0.55rem;
-  color: #fbbf24;
+  color: #cccccc;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1570,10 +1669,10 @@ a {
 
 @keyframes amber-pulse {
   0%, 100% {
-    box-shadow: 0 0 40px rgba(245, 158, 11, 0.4), 0 0 80px rgba(245, 158, 11, 0.15), inset 0 0 25px rgba(245, 158, 11, 0.06);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), 0 0 80px rgba(255, 255, 255, 0.15), inset 0 0 25px rgba(255, 255, 255, 0.06);
   }
   50% {
-    box-shadow: 0 0 55px rgba(245, 158, 11, 0.55), 0 0 100px rgba(245, 158, 11, 0.2), inset 0 0 30px rgba(245, 158, 11, 0.1);
+    box-shadow: 0 0 55px rgba(255, 255, 255, 0.55), 0 0 100px rgba(255, 255, 255, 0.2), inset 0 0 30px rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -1625,17 +1724,17 @@ a {
 }
 
 .inner-ring .tree-node.unlocked {
-  border: 2px solid rgba(245, 158, 11, 0.7);
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25), 0 0 50px rgba(245, 158, 11, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25), 0 0 50px rgba(255, 255, 255, 0.08);
 }
 
 .inner-ring .tree-node.unlocked:hover {
   transform: translateZ(25px) scale(1.12);
-  box-shadow: 0 0 35px rgba(245, 158, 11, 0.4), 0 0 70px rgba(245, 158, 11, 0.12);
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.4), 0 0 70px rgba(255, 255, 255, 0.12);
 }
 
 .inner-ring .tree-node.unlocked .node-label {
-  color: rgba(251, 191, 36, 0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Unlocked node ring on hover */
@@ -1644,12 +1743,12 @@ a {
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 1px solid rgba(245, 158, 11, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
   transition: border-color 0.3s ease, inset 0.3s ease;
 }
 
 .tree-node.unlocked:hover::before {
-  border-color: rgba(245, 158, 11, 0.25);
+  border-color: rgba(255, 255, 255, 0.25);
   inset: -10px;
 }
 
@@ -1671,7 +1770,7 @@ a {
 
 /* Locked node */
 .tree-node.locked {
-  border: 1px solid rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   opacity: 0.35;
   filter: grayscale(0.5) blur(0.3px);
 }
@@ -1687,7 +1786,7 @@ a {
 
 /* Active node highlight */
 .tree-node.active-node {
-  box-shadow: 0 0 40px rgba(245, 158, 11, 0.55), 0 0 80px rgba(245, 158, 11, 0.2) !important;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.55), 0 0 80px rgba(255, 255, 255, 0.2) !important;
   z-index: 10;
 }
 
@@ -1703,8 +1802,8 @@ a {
 .tree-node.neighbor-highlight {
   opacity: 0.8 !important;
   filter: grayscale(0) blur(0px) !important;
-  border-color: rgba(245, 158, 11, 0.4) !important;
-  box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 /* Locked shake */
@@ -1742,7 +1841,7 @@ a {
 .tree-connections line.line-active {
   opacity: 0.8;
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
 }
 
 /* ===== EVOLVE Tooltip ===== */
@@ -1750,16 +1849,16 @@ a {
   position: absolute;
   padding: 8px 14px;
   background: rgba(20, 16, 8, 0.95);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
-  color: rgba(251, 191, 36, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.7rem;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.1);
   transition: opacity 0.2s ease;
   transform: translateX(-50%);
 }
@@ -1774,7 +1873,7 @@ a {
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid rgba(245, 158, 11, 0.3);
+  border-top: 6px solid rgba(255, 255, 255, 0.3);
 }
 
 /* ===== EVOLVE Detail Panel — Side Slide-In ===== */
@@ -1787,11 +1886,11 @@ a {
   max-height: 80vh;
   padding: 30px 24px;
   background: rgba(15, 12, 6, 0.97);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   z-index: 30;
   backdrop-filter: blur(20px);
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.06);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.06);
   transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
@@ -1819,7 +1918,7 @@ a {
 }
 
 .detail-close:hover {
-  color: #f59e0b;
+  color: #ffffff;
 }
 
 .detail-icon {
@@ -1830,7 +1929,7 @@ a {
 .detail-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #fbbf24;
+  color: #cccccc;
   margin: 0;
 }
 
@@ -1865,10 +1964,10 @@ a {
 .detail-tool-tag {
   padding: 4px 10px;
   font-size: 0.65rem;
-  color: rgba(245, 158, 11, 0.8);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  background: rgba(245, 158, 11, 0.06);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .detail-specs {
@@ -1891,14 +1990,14 @@ a {
 .detail-progress-bar {
   width: 100%;
   height: 6px;
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   overflow: hidden;
 }
 
 .detail-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  background: linear-gradient(90deg, #ffffff, #cccccc);
   border-radius: 6px;
   width: 0%;
   transition: width 0.8s ease-out;
@@ -1906,7 +2005,7 @@ a {
 
 .detail-progress-text {
   font-size: 0.6rem;
-  color: rgba(245, 158, 11, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   margin-top: 4px;
   display: block;
 }
@@ -1920,11 +2019,11 @@ a {
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
-  background: rgba(245, 158, 11, 0.08);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
-  color: rgba(251, 191, 36, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-family: inherit;
   font-size: 0.72rem;
   font-weight: 600;
@@ -1937,9 +2036,9 @@ a {
 }
 
 .unlock-all-btn:hover {
-  border-color: rgba(245, 158, 11, 0.6);
-  background: rgba(245, 158, 11, 0.15);
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.2), 0 0 50px rgba(245, 158, 11, 0.08);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2), 0 0 50px rgba(255, 255, 255, 0.08);
 }
 
 .unlock-all-btn .unlock-btn-icon {
@@ -1947,9 +2046,9 @@ a {
 }
 
 .unlock-all-btn.is-unlocked {
-  border-color: rgba(245, 158, 11, 0.5);
-  background: rgba(245, 158, 11, 0.12);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
 /* Stats Row */
@@ -1970,7 +2069,7 @@ a {
 .evolve-stat .stat-number {
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  background: linear-gradient(135deg, #ffffff, #cccccc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1990,6 +2089,16 @@ a {
     padding: 60px 30px;
     gap: 40px;
   }
+
+  .evolve-content { gap: 24px; }
+
+  .evolve-profile-card {
+    width: 190px;
+    padding: 24px 16px;
+    gap: 12px;
+  }
+
+  .profile-bio { font-size: 0.65rem; }
 
   .skill-tree-container {
     max-width: 550px;
@@ -2023,6 +2132,27 @@ a {
     padding: 50px 16px;
     gap: 30px;
   }
+
+  .evolve-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .evolve-profile-card {
+    width: 100%;
+    max-width: 320px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .profile-avatar { width: 50px; height: 50px; }
+  .avatar-icon { font-size: 1.6rem; }
+  .profile-name { font-size: 0.95rem; }
+  .profile-bio { font-size: 0.65rem; }
+  .profile-stats { padding-top: 8px; }
 
   .evolve-title { font-size: clamp(2.5rem, 10vw, 4rem); }
   .evolve-xp-bar { width: 220px; }
@@ -2207,25 +2337,7 @@ body.no-scroll {
   touch-action: none;
 }
 
-/* GPU-accelerated parallax elements */
-.hero-title,
-.hero-subtitle,
-.hero-bottom-bar,
-.discover-title,
-.discover-desc,
-.learn-title,
-.learn-circle-1,
-.learn-circle-2,
-.use-them-title,
-.split-prompt,
-.split-result,
-.evolve-header,
-.skill-tree-container,
-.evolve-stats,
-.bento-title,
-.bento-grid {
-  will-change: transform;
-}
+/* will-change applied per-section by GSAP during animation, not blanket */
 
 /* BENTO FEATURES SECTION */
 .bento-section {

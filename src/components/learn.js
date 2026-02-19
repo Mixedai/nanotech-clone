@@ -3,8 +3,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function initLearn() {
   const section = document.querySelector('.learn-section');
   if (!section) return;

@@ -4,8 +4,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ParticleCanvas } from './particles.js';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function initDiscover() {
   const section = document.querySelector('.discover-section');
   if (!section) return;
@@ -142,6 +140,13 @@ function _initCardTilt(section) {
   const cards = section.querySelectorAll('.glass-card');
 
   cards.forEach((card) => {
+    // Use gsap.quickTo for batched compositor-only updates
+    const setRotateX = gsap.quickTo(card, 'rotateX', { duration: 0.15, ease: 'power2.out' });
+    const setRotateY = gsap.quickTo(card, 'rotateY', { duration: 0.15, ease: 'power2.out' });
+    const setZ = gsap.quickTo(card, 'z', { duration: 0.15, ease: 'power2.out' });
+
+    gsap.set(card, { transformPerspective: 1000 });
+
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -149,16 +154,15 @@ function _initCardTilt(section) {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -8;
-      const rotateY = ((x - centerX) / centerX) * 8;
-
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      setRotateX(((y - centerY) / centerY) * -8);
+      setRotateY(((x - centerX) / centerX) * 8);
+      setZ(10);
     });
 
     card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.5s ease';
-      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
-      setTimeout(() => { card.style.transition = ''; }, 500);
+      setRotateX(0);
+      setRotateY(0);
+      setZ(0);
     });
   });
 }
@@ -179,8 +183,8 @@ function _initGlowTracking(section) {
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       const glow = card.querySelector('.glass-glow') || _createGlow(card);
-      glow.style.left = `${x}%`;
-      glow.style.top = `${y}%`;
+      // Use transform instead of left/top (compositor-only, no layout reflow)
+      glow.style.transform = `translate(calc(${x}% - 50%), calc(${y}% - 50%))`;
     });
   });
 }
@@ -190,6 +194,8 @@ function _createGlow(card) {
   glow.className = 'glass-glow';
   glow.style.cssText = `
     position: absolute;
+    top: 0;
+    left: 0;
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -197,8 +203,7 @@ function _createGlow(card) {
     opacity: 0.08;
     filter: blur(60px);
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: left 0.2s ease, top 0.2s ease;
+    transition: transform 0.2s ease;
     z-index: 0;
   `;
   card.appendChild(glow);

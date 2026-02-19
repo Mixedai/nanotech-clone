@@ -3,8 +3,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function initUseThem() {
   const section = document.querySelector('.use-them-section');
   if (!section) return;

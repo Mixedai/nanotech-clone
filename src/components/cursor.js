@@ -6,14 +6,13 @@ export function initCursor() {
 
     if (!cursor) return;
 
-    // Follow mouse
+    // Use quickTo for efficient per-frame updates (no new tween per event)
+    const xTo = gsap.quickTo(cursor, 'x', { duration: 0.1, ease: 'power2.out' });
+    const yTo = gsap.quickTo(cursor, 'y', { duration: 0.1, ease: 'power2.out' });
+
     document.addEventListener('mousemove', (e) => {
-        gsap.to(cursor, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.1,
-            ease: 'power2.out'
-        });
+        xTo(e.clientX);
+        yTo(e.clientY);
     });
 
     // Hover effects

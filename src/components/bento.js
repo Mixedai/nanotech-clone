@@ -3,8 +3,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function initBento() {
   const section = document.querySelector('.bento-section');
   if (!section) return;

@@ -1,7 +1,4 @@
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function initHero() {
     const subtitleEl = document.querySelector('.hero-subtitle');
@@ -10,17 +7,17 @@ export function initHero() {
 
     const tl = gsap.timeline();
 
-    // 1. Header entrance
-    tl.from('.site-header', {
-        y: -50,
-        opacity: 0,
+    // 1. Header entrance (CSS sets initial hidden state)
+    tl.to('.site-header', {
+        y: 0,
+        opacity: 1,
         duration: 1,
         ease: 'power3.out',
         delay: 0.2
     })
-    // 2. Title clip-path reveal (line by line mask)
-    .from('.title-line-inner', {
-        yPercent: 110,
+    // 2. Title clip-path reveal (CSS sets translateY(110%))
+    .to('.title-line-inner', {
+        y: 0,
         duration: 1.2,
         stagger: 0.15,
         ease: 'power4.out'
@@ -29,17 +26,17 @@ export function initHero() {
     .add(() => {
         _initTypingEffect(subtitleEl, 0);
     })
-    // 4. CTA slide-up (1.2s after typing starts)
-    .from('.hero-cta', {
-        y: 20,
-        opacity: 0,
+    // 4. CTA slide-up (CSS sets initial hidden state)
+    .to('.hero-cta', {
+        y: 0,
+        opacity: 1,
         duration: 0.8,
         ease: 'power3.out'
     }, '+=1.2')
-    // 5. Bottom bar + scroll indicator
-    .from('.hero-bottom-bar > *', {
-        y: 20,
-        opacity: 0,
+    // 5. Bottom bar + scroll indicator (CSS sets initial hidden state)
+    .to('.hero-bottom-bar > *', {
+        y: 0,
+        opacity: 1,
         duration: 0.8,
         stagger: 0.2,
         ease: 'power2.out'
@@ -57,6 +54,10 @@ function _initSpotlight() {
     const spotlight = document.querySelector('.hero-spotlight');
     if (!section || !spotlight) return;
 
+    // Use quickSetter for batched transform updates
+    const setX = gsap.quickSetter(spotlight, 'x', 'px');
+    const setY = gsap.quickSetter(spotlight, 'y', 'px');
+
     section.addEventListener('mouseenter', () => {
         spotlight.style.opacity = '1';
     });
@@ -67,9 +68,8 @@ function _initSpotlight() {
 
     section.addEventListener('mousemove', (e) => {
         const rect = section.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        spotlight.style.transform = `translate(calc(${x}px - 50%), calc(${y}px - 50%))`;
+        setX(e.clientX - rect.left - 250);
+        setY(e.clientY - rect.top - 250);
     });
 }
 
@@ -117,7 +117,12 @@ function _initCTAScroll() {
 
     cta.addEventListener('click', (e) => {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
+        // Use lenis if available, fallback to native
+        if (window.__lenis) {
+            window.__lenis.scrollTo(target);
+        } else {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 }
 

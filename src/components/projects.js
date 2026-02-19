@@ -2,11 +2,10 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export function initProjects() {
-    setTimeout(() => {
+    // Use delayedCall instead of arbitrary setTimeout for reliable timing
+    gsap.delayedCall(0, () => {
         const items = document.querySelectorAll('.project-title-item');
         const bgs = document.querySelectorAll('.project-bg');
-
-        console.log(`Init Projects: ${items.length} items, ${bgs.length} bgs`);
 
         if (items.length === 0 || bgs.length === 0) return;
 
@@ -28,11 +27,10 @@ export function initProjects() {
         items.forEach((item, index) => {
             ScrollTrigger.create({
                 trigger: item,
-                start: "top center", // When top of item hits center
-                end: "bottom center", // When bottom of item hits center
+                start: "top center",
+                end: "bottom center",
                 onEnter: () => setActive(index),
                 onEnterBack: () => setActive(index),
-                // optional: onLeave: () => hide(index) if we want solid black gaps
             });
 
             // Keep Hover for desktop mouse users
@@ -40,6 +38,5 @@ export function initProjects() {
         });
 
         ScrollTrigger.refresh();
-
-    }, 300);
+    });
 }

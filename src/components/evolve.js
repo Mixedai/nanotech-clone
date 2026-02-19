@@ -3,8 +3,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const INNER_RADIUS = 180;
 const OUTER_RADIUS = 295;
 const TABLET_INNER = 140;
@@ -98,10 +96,10 @@ function _drawConnections(container) {
   grad.id = 'amber-gradient';
   const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
   stop1.setAttribute('offset', '0%');
-  stop1.setAttribute('stop-color', 'rgba(245, 158, 11, 0.15)');
+  stop1.setAttribute('stop-color', 'rgba(255, 255, 255, 0.15)');
   const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
   stop2.setAttribute('offset', '100%');
-  stop2.setAttribute('stop-color', 'rgba(245, 158, 11, 0.6)');
+  stop2.setAttribute('stop-color', 'rgba(255, 255, 255, 0.6)');
   grad.appendChild(stop1);
   grad.appendChild(stop2);
   defs.appendChild(grad);
@@ -368,11 +366,11 @@ function _clearActiveState(section, svg) {
 
 // --- Scroll Entrance Animations ---
 function _initScrollAnimations(section) {
-  const badge = section.querySelector('.evolve-level-badge');
   const title = section.querySelector('.evolve-title');
   const subtitle = section.querySelector('.evolve-subtitle');
   const xpBar = section.querySelector('.evolve-xp-bar');
   const xpFill = section.querySelector('.xp-fill');
+  const profileCard = section.querySelector('.evolve-profile-card');
   const centerNode = section.querySelector('.tree-center-node');
   const innerNodes = section.querySelectorAll('.inner-ring .tree-node');
   const outerNodes = section.querySelectorAll('.outer-ring .tree-node');
@@ -383,8 +381,8 @@ function _initScrollAnimations(section) {
   if (!title) return;
 
   // Set initial hidden states explicitly (avoids GSAP from() + Lenis timing issues)
-  if (badge) gsap.set(badge, { y: -20, opacity: 0 });
   gsap.set(title, { y: 30, opacity: 0, scale: 0.9 });
+  if (profileCard) gsap.set(profileCard, { x: -40, opacity: 0 });
   if (subtitle) gsap.set(subtitle, { y: 20, opacity: 0 });
   if (xpBar) gsap.set(xpBar, { opacity: 0, scaleX: 0, transformOrigin: 'left center' });
   if (xpFill) gsap.set(xpFill, { width: '0%' });
@@ -404,11 +402,7 @@ function _initScrollAnimations(section) {
   });
 
   // Header entrance
-  if (badge) {
-    tl.to(badge, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' });
-  }
-
-  tl.to(title, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'power4.out' }, '-=0.2');
+  tl.to(title, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'power4.out' });
 
   if (subtitle) {
     tl.to(subtitle, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, '-=0.4');
@@ -416,6 +410,11 @@ function _initScrollAnimations(section) {
 
   if (xpBar) {
     tl.to(xpBar, { opacity: 1, scaleX: 1, duration: 0.4, ease: 'power3.out' }, '-=0.2');
+  }
+
+  // Profile card slides in from left
+  if (profileCard) {
+    tl.to(profileCard, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.3');
   }
 
   // Orbit rings fade in
@@ -568,7 +567,7 @@ function _unlockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, 
   if (svg) {
     const lines = svg.querySelectorAll('line');
     gsap.to(lines, {
-      attr: { stroke: 'rgba(245, 158, 11, 0.5)' },
+      attr: { stroke: 'rgba(255, 255, 255, 0.5)' },
       duration: 0.4,
       stagger: 0.03,
       delay: innerDuration,
@@ -579,19 +578,11 @@ function _unlockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, 
   // Update stats
   const totalDelay = innerDuration + lockedNodes.length * 0.08 + 0.3;
   if (statsNumber) {
-    gsap.to({}, {
-      duration: 0.01,
-      delay: totalDelay,
-      onComplete() { statsNumber.textContent = '18'; },
-    });
+    gsap.delayedCall(totalDelay, () => { statsNumber.textContent = '18'; });
   }
   if (xpFill) gsap.to(xpFill, { width: '100%', duration: 0.8, delay: innerDuration, ease: 'power2.out' });
   if (xpText) {
-    gsap.to({}, {
-      duration: 0.01,
-      delay: totalDelay,
-      onComplete() { xpText.textContent = '3,000 / 3,000 XP'; },
-    });
+    gsap.delayedCall(totalDelay, () => { xpText.textContent = '3,000 / 3,000 XP'; });
   }
 
   // Update button
@@ -636,7 +627,7 @@ function _lockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, xp
   if (svg) {
     const lines = svg.querySelectorAll('line');
     gsap.to(lines, {
-      attr: { stroke: 'rgba(245, 158, 11, 0.15)' },
+      attr: { stroke: 'rgba(255, 255, 255, 0.15)' },
       duration: 0.4,
       stagger: 0.02,
       ease: 'power2.out',
@@ -645,11 +636,11 @@ function _lockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, xp
 
   // Reset stats
   if (statsNumber) {
-    gsap.to({}, { duration: 0.01, delay: 0.6, onComplete() { statsNumber.textContent = '0'; } });
+    gsap.delayedCall(0.6, () => { statsNumber.textContent = '0'; });
   }
   if (xpFill) gsap.to(xpFill, { width: '0%', duration: 0.6, ease: 'power2.out' });
   if (xpText) {
-    gsap.to({}, { duration: 0.01, delay: 0.6, onComplete() { xpText.textContent = '0 / 3,000 XP'; } });
+    gsap.delayedCall(0.6, () => { xpText.textContent = '0 / 3,000 XP'; });
   }
 
   // Reset button
