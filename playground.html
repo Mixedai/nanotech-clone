@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Playground — AI Toologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+</head>
+
+<body>
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor"></div>
+
+  <!-- HEADER -->
+  <header class="site-header" style="opacity: 1; transform: none;">
+    <a href="/" class="logo">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="20" height="20" fill="white" />
+        <rect x="20" y="10" width="10" height="10" fill="#666" />
+      </svg>
+    </a>
+
+    <div class="menu-toggle" onclick="document.querySelector('.menu-overlay').classList.add('open')">
+      <div style="width: 30px; height: 2px; background: white; margin-bottom: 6px;"></div>
+      <div style="width: 30px; height: 2px; background: white; margin-bottom: 6px;"></div>
+      <div style="width: 20px; height: 2px; background: white; margin-left: auto;"></div>
+    </div>
+
+    <a href="#" class="btn-talk">Let's Talk</a>
+  </header>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay">
+    <div class="menu-close" onclick="document.querySelector('.menu-overlay').classList.remove('open')">Close X</div>
+    <nav class="menu-nav">
+      <a href="/">Home</a>
+      <a href="/tools.html">Tools</a>
+      <a href="/playground.html" class="active">Playground</a>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="playground-page">
+    <!-- Playground Layout -->
+    <div class="pg-layout">
+      <!-- Sidebar: Tool Selector -->
+      <aside class="pg-sidebar">
+        <h2 class="pg-sidebar-title">Select Tool</h2>
+        <div class="pg-tool-list" id="pgToolList">
+          <!-- Populated by JS -->
+        </div>
+        <div class="pg-tool-info" id="pgToolInfo">
+          <!-- Populated by JS on selection -->
+        </div>
+      </aside>
+
+      <!-- Main Area -->
+      <div class="pg-main">
+        <!-- Input Section -->
+        <div class="pg-input-section">
+          <div class="pg-terminal-header">
+            <div class="pg-terminal-dots">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <span class="pg-terminal-title" id="pgTerminalTitle">Prompt</span>
+          </div>
+          <textarea class="pg-textarea" id="pgTextarea" placeholder="Type your prompt here...&#10;&#10;Example: Write me a landing page for an AI startup with a dark theme, hero animation, and pricing section" rows="6"></textarea>
+          <div class="pg-input-footer">
+            <div class="pg-model-badge" id="pgModelBadge">
+              <span class="pg-model-dot"></span>
+              <span>Select a tool</span>
+            </div>
+            <button class="pg-send-btn" id="pgSendBtn" disabled>
+              Generate
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Section -->
+        <div class="pg-output-section" id="pgOutputSection">
+          <div class="pg-output-header">
+            <span class="pg-output-label">Output</span>
+            <div class="pg-output-meta" id="pgOutputMeta"></div>
+          </div>
+          <div class="pg-output-content" id="pgOutputContent">
+            <div class="pg-output-placeholder">
+              <p>Select a tool and enter a prompt to see AI-generated output.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <div class="footer-content">
+        <p class="footer-brand">AI Toologist</p>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools.html">Tools</a>
+          <a href="/playground.html">Playground</a>
+        </div>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/playground-main.js"></script>
+</body>
+
+</html>
