@@ -23,3 +23,13 @@ dist-ssr
 *.sln
 *.sw?
 hero-current
+
+# Screenshots (browser tool captures)
+bento-section
+bottom-of-page
+initial-load
+modal-detail
+projects-section-scroll
+
+# Claude Code
+.claude/
