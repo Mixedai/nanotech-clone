@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Tools Directory — AI Toologist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap">
+</head>
+
+<body>
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor"></div>
+
+  <!-- HEADER -->
+  <header class="site-header" style="opacity: 1; transform: none;">
+    <a href="/" class="logo">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="10" width="20" height="20" fill="white" />
+        <rect x="20" y="10" width="10" height="10" fill="#666" />
+      </svg>
+    </a>
+
+    <div class="menu-toggle" onclick="document.querySelector('.menu-overlay').classList.add('open')">
+      <div style="width: 30px; height: 2px; background: white; margin-bottom: 6px;"></div>
+      <div style="width: 30px; height: 2px; background: white; margin-bottom: 6px;"></div>
+      <div style="width: 20px; height: 2px; background: white; margin-left: auto;"></div>
+    </div>
+
+    <a href="#" class="btn-talk">Let's Talk</a>
+  </header>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay">
+    <div class="menu-close" onclick="document.querySelector('.menu-overlay').classList.remove('open')">Close X</div>
+    <nav class="menu-nav">
+      <a href="/">Home</a>
+      <a href="/tools.html" class="active">Tools</a>
+      <a href="/playground.html">Playground</a>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="tools-page">
+    <!-- Page Hero -->
+    <section class="tools-hero">
+      <div class="tools-hero-spotlight"></div>
+      <h1 class="tools-hero-title">AI Tools</h1>
+      <p class="tools-hero-subtitle">Browse, compare and discover the best AI tools across every category.</p>
+
+      <!-- Search Bar -->
+      <div class="tools-search-wrapper">
+        <div class="tools-search">
+          <svg class="tools-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="tools-search-input" placeholder="Search tools..." />
+          <kbd class="tools-search-kbd">⌘K</kbd>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="tools-stats-bar">
+        <div class="tools-stat-item">
+          <span class="tools-stat-number" data-target="20">0</span>
+          <span class="tools-stat-plus">+</span>
+          <span class="tools-stat-label">AI Tools</span>
+        </div>
+        <div class="tools-stat-divider"></div>
+        <div class="tools-stat-item">
+          <span class="tools-stat-number" data-target="8">0</span>
+          <span class="tools-stat-label">Categories</span>
+        </div>
+        <div class="tools-stat-divider"></div>
+        <div class="tools-stat-item">
+          <span class="tools-stat-number" data-target="500">0</span>
+          <span class="tools-stat-plus">M+</span>
+          <span class="tools-stat-label">Total Users</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Tools Carousel -->
+    <section class="tools-featured-section">
+      <div class="tools-featured-header">
+        <div class="tools-featured-header-text">
+          <h2 class="tools-featured-title">Featured</h2>
+          <p class="tools-featured-desc">Hand-picked tools we love</p>
+        </div>
+      </div>
+
+      <div class="tools-featured-carousel-wrapper">
+        <div class="tools-featured-carousel" id="featuredCarousel">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Carousel Navigation -->
+        <div class="tools-featured-nav">
+          <div class="tools-featured-arrows">
+            <button class="tools-carousel-arrow tools-carousel-prev" aria-label="Previous">←</button>
+            <button class="tools-carousel-arrow tools-carousel-next" aria-label="Next">→</button>
+          </div>
+          <div class="tools-carousel-progress">
+            <div class="tools-carousel-progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Filter + View Toggle -->
+    <section class="tools-filter-bar">
+      <div class="tools-categories" id="toolsCategories">
+        <!-- Populated by JS -->
+      </div>
+      <div class="tools-filter-right">
+        <div class="tools-view-toggle" id="viewToggle">
+          <button class="view-btn active" data-view="grid" aria-label="Grid view">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="0" y="0" width="7" height="7" rx="1.5"/>
+              <rect x="9" y="0" width="7" height="7" rx="1.5"/>
+              <rect x="0" y="9" width="7" height="7" rx="1.5"/>
+              <rect x="9" y="9" width="7" height="7" rx="1.5"/>
+            </svg>
+          </button>
+          <button class="view-btn" data-view="list" aria-label="List view">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <rect x="0" y="1" width="16" height="3" rx="1"/>
+              <rect x="0" y="6.5" width="16" height="3" rx="1"/>
+              <rect x="0" y="12" width="16" height="3" rx="1"/>
+            </svg>
+          </button>
+        </div>
+        <div class="tools-sort">
+          <select class="tools-sort-select" id="toolsSort">
+            <option value="rating">Top Rated</option>
+            <option value="name">A-Z</option>
+            <option value="users">Most Popular</option>
+            <option value="price">Price: Free First</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <section class="tools-grid-section">
+      <div class="tools-count" id="toolsCount"></div>
+      <div class="tools-grid" id="toolsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- Tool Detail Modal -->
+    <div class="tool-modal-overlay" id="toolModal">
+      <div class="tool-modal">
+        <button class="tool-modal-close" id="toolModalClose">&times;</button>
+
+        <div class="tool-modal-header">
+          <div class="tool-modal-icon" id="modalIcon"></div>
+          <div class="tool-modal-title-group">
+            <h2 class="tool-modal-name" id="modalName"></h2>
+            <div class="tool-modal-meta">
+              <span class="tool-modal-rating" id="modalRating"></span>
+              <span class="tool-modal-price" id="modalPrice"></span>
+              <span class="tool-modal-users" id="modalUsers"></span>
+            </div>
+          </div>
+        </div>
+
+        <p class="tool-modal-description" id="modalDescription"></p>
+
+        <div class="tool-modal-features" id="modalFeatures">
+          <h3 class="tool-modal-section-title">Features</h3>
+          <ul class="tool-modal-features-list" id="modalFeaturesList"></ul>
+        </div>
+
+        <div class="tool-modal-pricing" id="modalPricing">
+          <h3 class="tool-modal-section-title">Pricing</h3>
+          <p class="tool-modal-pricing-text" id="modalPricingText"></p>
+        </div>
+
+        <div class="tool-modal-tags" id="modalTags"></div>
+
+        <div class="tool-modal-actions">
+          <a href="#" class="tool-modal-btn tool-modal-btn-primary" id="modalVisitBtn" target="_blank" rel="noopener">
+            Visit Website →
+          </a>
+          <a href="#" class="tool-modal-btn tool-modal-btn-secondary" id="modalTryBtn">
+            Try in Playground
+          </a>
+        </div>
+
+        <div class="tool-modal-related">
+          <h3 class="tool-modal-section-title">Related Tools</h3>
+          <div class="tool-modal-related-grid" id="modalRelated"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cmd+K Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+      <div class="search-overlay-backdrop"></div>
+      <div class="search-overlay-panel">
+        <div class="search-overlay-input-wrapper">
+          <svg class="search-overlay-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-overlay-input" id="searchOverlayInput" placeholder="Search AI tools..." autocomplete="off" />
+          <kbd class="search-overlay-esc">Esc</kbd>
+        </div>
+        <div class="search-overlay-results" id="searchOverlayResults"></div>
+        <div class="search-overlay-footer">
+          <span class="search-overlay-hint"><kbd>↑↓</kbd> Navigate</span>
+          <span class="search-overlay-hint"><kbd>↵</kbd> Open</span>
+          <span class="search-overlay-hint"><kbd>Esc</kbd> Close</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <div class="footer-content">
+        <p class="footer-brand">AI Toologist</p>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/tools.html">Tools</a>
+          <a href="/playground.html">Playground</a>
+        </div>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="/src/tools-main.js"></script>
+</body>
+
+</html>
