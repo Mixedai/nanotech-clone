@@ -2,8 +2,8 @@
 .light-switch-container {
     position: absolute;
     top: 0;
-    right: 15%;
-    /* Biraz daha içeri alalım */
+    right: 30%;
+    /* Header butonlarıyla çakışmasın */
     z-index: 50;
     pointer-events: none;
     /* Kabloya tıklayabilmek için child elementlerde pointer-events: auto olmalı */
@@ -99,11 +99,11 @@ body.light-on .lamp-bulb {
     /* Hero z-index: 5, bunun altında kalmalı */
     pointer-events: none;
     transition: opacity 0.5s ease-out;
-    opacity: 1;
-    /* Başlangıçta LOŞ (Ama görülebilir) */
+    opacity: 0;
+    /* Başlangıçta kapalı — ışık kapatılınca aktif olur */
 }
 
-/* Işık yanınca overlay kalksın */
+/* Işık yanınca da overlay kapalı kalır — efekt sadece ampül + text glow */
 body.light-on .dark-overlay {
     opacity: 0;
 }
