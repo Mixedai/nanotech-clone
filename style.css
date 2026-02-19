@@ -1527,9 +1527,11 @@ a {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateZ(40px);
+  transform: translateZ(40px);
   width: 120px;
   height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
   border-radius: 50%;
   background: radial-gradient(circle at 30% 30%, #1a1508, #0f0d08);
   border: 2px solid #f59e0b;
@@ -1549,7 +1551,7 @@ a {
 }
 
 .tree-center-node:hover {
-  transform: translate(-50%, -50%) translateZ(40px) scale(1.08);
+  transform: translateZ(40px) scale(1.08);
 }
 
 .tree-center-node .node-icon {
@@ -1694,7 +1696,7 @@ a {
 }
 
 .tree-center-node.active-node {
-  transform: translate(-50%, -50%) translateZ(40px) scale(1.12) !important;
+  transform: translateZ(40px) scale(1.12) !important;
 }
 
 /* Neighbor highlight when parent clicked */
@@ -1958,7 +1960,7 @@ a {
 
   .inner-ring .tree-node { width: 65px; height: 65px; }
   .outer-ring .tree-node { width: 48px; height: 48px; }
-  .tree-center-node { width: 100px; height: 100px; }
+  .tree-center-node { width: 100px; height: 100px; margin-left: -50px; margin-top: -50px; }
 
   .evolve-stats { gap: 35px; }
 
@@ -1999,6 +2001,7 @@ a {
     transform: none;
     width: 90px;
     height: 90px;
+    margin: 0 auto;
   }
 
   .tree-center-node:hover { transform: scale(1.08); }
