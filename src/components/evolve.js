@@ -25,6 +25,7 @@ export function initEvolve() {
   _initParallax(section);
   _initTooltips(section);
   _initNodeClicks(section);
+  _initUnlockAll(section);
 
   // Reposition on resize
   let resizeTimer;
@@ -381,73 +382,60 @@ function _initScrollAnimations(section) {
 
   if (!title) return;
 
+  // Set initial hidden states explicitly (avoids GSAP from() + Lenis timing issues)
+  if (badge) gsap.set(badge, { y: -20, opacity: 0 });
+  gsap.set(title, { y: 30, opacity: 0, scale: 0.9 });
+  if (subtitle) gsap.set(subtitle, { y: 20, opacity: 0 });
+  if (xpBar) gsap.set(xpBar, { opacity: 0, scaleX: 0, transformOrigin: 'left center' });
+  if (xpFill) gsap.set(xpFill, { width: '0%' });
+  if (orbitRings.length > 0) gsap.set(orbitRings, { opacity: 0, scale: 0.8 });
+  if (centerNode) gsap.set(centerNode, { scale: 0, opacity: 0 });
+  if (innerNodes.length > 0) gsap.set(innerNodes, { scale: 0, opacity: 0 });
+  if (outerNodes.length > 0) gsap.set(outerNodes, { opacity: 0, scale: 0.6 });
+  if (stats.length > 0) gsap.set(stats, { y: 30, opacity: 0 });
+  if (particles.length > 0) gsap.set(particles, { opacity: 0 });
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: section,
       start: 'top 70%',
-      toggleActions: 'play none none reverse',
+      toggleActions: 'play none none none',
     },
   });
 
   // Header entrance
   if (badge) {
-    tl.from(badge, { y: -20, opacity: 0, duration: 0.4, ease: 'power3.out' });
+    tl.to(badge, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' });
   }
 
-  tl.from(title, { y: 30, opacity: 0, scale: 0.9, duration: 0.7, ease: 'power4.out' }, '-=0.2');
+  tl.to(title, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'power4.out' }, '-=0.2');
 
   if (subtitle) {
-    tl.from(subtitle, { y: 20, opacity: 0, duration: 0.4, ease: 'power3.out' }, '-=0.4');
+    tl.to(subtitle, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }, '-=0.4');
   }
 
   if (xpBar) {
-    tl.from(xpBar, { opacity: 0, scaleX: 0, transformOrigin: 'left center', duration: 0.4, ease: 'power3.out' }, '-=0.2');
-  }
-
-  if (xpFill) {
-    tl.from(xpFill, { width: '0%', duration: 1, ease: 'power2.out' }, '-=0.2');
+    tl.to(xpBar, { opacity: 1, scaleX: 1, duration: 0.4, ease: 'power3.out' }, '-=0.2');
   }
 
   // Orbit rings fade in
   if (orbitRings.length > 0) {
-    tl.from(orbitRings, { opacity: 0, scale: 0.8, duration: 0.6, stagger: 0.15, ease: 'power2.out' }, '-=0.5');
+    tl.to(orbitRings, { opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: 'power2.out' }, '-=0.5');
   }
 
-  // Center node pops in
+  // Center node pops in (inner/outer nodes wait for Unlock All button)
   if (centerNode) {
-    tl.from(centerNode, { scale: 0, opacity: 0, duration: 0.6, ease: 'back.out(2.5)' }, '-=0.3');
-  }
-
-  // Inner ring nodes appear in sequence around the orbit
-  if (innerNodes.length > 0) {
-    tl.from(innerNodes, {
-      scale: 0,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.12,
-      ease: 'back.out(2)',
-    }, '-=0.2');
-  }
-
-  // Outer ring nodes fade in
-  if (outerNodes.length > 0) {
-    tl.from(outerNodes, {
-      opacity: 0,
-      scale: 0.6,
-      duration: 0.4,
-      stagger: 0.06,
-      ease: 'power2.out',
-    }, '-=0.2');
+    tl.to(centerNode, { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2.5)' }, '-=0.3');
   }
 
   // Stats slide up
   if (stats.length > 0) {
-    tl.from(stats, { y: 30, opacity: 0, duration: 0.5, stagger: 0.15, ease: 'power3.out' }, '-=0.2');
+    tl.to(stats, { y: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power3.out' }, '-=0.2');
   }
 
   // Particles fade
   if (particles.length > 0) {
-    tl.from(particles, { opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power1.out' }, '-=0.5');
+    tl.to(particles, { opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power1.out' }, '-=0.5');
   }
 }
 
@@ -499,4 +487,173 @@ function _initParallax(section) {
       });
     }
   });
+}
+
+// --- Unlock All Button ---
+function _initUnlockAll(section) {
+  const btn = section.querySelector('.unlock-all-btn');
+  if (!btn) return;
+
+  const lockedNodes = section.querySelectorAll('.outer-ring .tree-node.locked');
+  const innerNodes = section.querySelectorAll('.inner-ring .tree-node');
+  const centerNode = section.querySelector('.tree-center-node');
+  const svg = section.querySelector('.tree-connections');
+  const statsNumber = section.querySelector('.evolve-stat .stat-number');
+  const xpFill = section.querySelector('.xp-fill');
+  const xpText = section.querySelector('.xp-text');
+
+  let isUnlocked = false;
+
+  btn.addEventListener('click', () => {
+    if (isUnlocked) {
+      _lockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, xpFill, xpText);
+    } else {
+      _unlockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, xpFill, xpText);
+    }
+    isUnlocked = !isUnlocked;
+  });
+}
+
+function _unlockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, xpFill, xpText) {
+  // Pulse center node first
+  if (centerNode) {
+    gsap.to(centerNode, {
+      scale: 1.2,
+      duration: 0.3,
+      ease: 'power2.out',
+      yoyo: true,
+      repeat: 1,
+    });
+  }
+
+  // Reveal inner ring nodes (they start hidden from gsap.set)
+  if (innerNodes.length > 0) {
+    gsap.to(innerNodes, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: 'back.out(2)',
+      delay: 0.2,
+    });
+  }
+
+  // Reveal + unlock outer ring nodes with cascade
+  const innerDuration = 0.2 + innerNodes.length * 0.1 + 0.5;
+  lockedNodes.forEach((node, i) => {
+    const icon = node.querySelector('.node-icon');
+    const realIcon = node.dataset.icon || '✨';
+
+    gsap.fromTo(node,
+      { scale: 0, opacity: 0 },
+      {
+        scale: 1.3,
+        opacity: 1,
+        duration: 0.3,
+        delay: innerDuration + i * 0.08,
+        ease: 'back.out(3)',
+        onStart() {
+          node.classList.remove('locked');
+          node.classList.add('unlocked');
+          if (icon) icon.textContent = realIcon;
+        },
+        onComplete() {
+          gsap.to(node, { scale: 1, duration: 0.2, ease: 'power2.out' });
+        },
+      }
+    );
+  });
+
+  // Highlight SVG lines
+  if (svg) {
+    const lines = svg.querySelectorAll('line');
+    gsap.to(lines, {
+      attr: { stroke: 'rgba(245, 158, 11, 0.5)' },
+      duration: 0.4,
+      stagger: 0.03,
+      delay: innerDuration,
+      ease: 'power2.out',
+    });
+  }
+
+  // Update stats
+  const totalDelay = innerDuration + lockedNodes.length * 0.08 + 0.3;
+  if (statsNumber) {
+    gsap.to({}, {
+      duration: 0.01,
+      delay: totalDelay,
+      onComplete() { statsNumber.textContent = '18'; },
+    });
+  }
+  if (xpFill) gsap.to(xpFill, { width: '100%', duration: 0.8, delay: innerDuration, ease: 'power2.out' });
+  if (xpText) {
+    gsap.to({}, {
+      duration: 0.01,
+      delay: totalDelay,
+      onComplete() { xpText.textContent = '3,000 / 3,000 XP'; },
+    });
+  }
+
+  // Update button
+  btn.classList.add('is-unlocked');
+  btn.querySelector('.unlock-btn-icon').textContent = '↩';
+  btn.querySelector('.unlock-btn-text').textContent = 'Reset';
+}
+
+function _lockAll(btn, lockedNodes, innerNodes, centerNode, svg, statsNumber, xpFill, xpText) {
+  // Hide outer nodes first
+  lockedNodes.forEach((node, i) => {
+    const icon = node.querySelector('.node-icon');
+
+    gsap.to(node, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.25,
+      delay: i * 0.04,
+      ease: 'power2.in',
+      onComplete() {
+        node.classList.remove('unlocked');
+        node.classList.add('locked');
+        if (icon) icon.textContent = '🔒';
+      },
+    });
+  });
+
+  // Hide inner ring nodes
+  const outerDuration = lockedNodes.length * 0.04 + 0.25;
+  if (innerNodes.length > 0) {
+    gsap.to(innerNodes, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.3,
+      stagger: 0.06,
+      delay: outerDuration * 0.5,
+      ease: 'power2.in',
+    });
+  }
+
+  // Reset SVG lines
+  if (svg) {
+    const lines = svg.querySelectorAll('line');
+    gsap.to(lines, {
+      attr: { stroke: 'rgba(245, 158, 11, 0.15)' },
+      duration: 0.4,
+      stagger: 0.02,
+      ease: 'power2.out',
+    });
+  }
+
+  // Reset stats
+  if (statsNumber) {
+    gsap.to({}, { duration: 0.01, delay: 0.6, onComplete() { statsNumber.textContent = '0'; } });
+  }
+  if (xpFill) gsap.to(xpFill, { width: '0%', duration: 0.6, ease: 'power2.out' });
+  if (xpText) {
+    gsap.to({}, { duration: 0.01, delay: 0.6, onComplete() { xpText.textContent = '0 / 3,000 XP'; } });
+  }
+
+  // Reset button
+  btn.classList.remove('is-unlocked');
+  btn.querySelector('.unlock-btn-icon').textContent = '⚡';
+  btn.querySelector('.unlock-btn-text').textContent = 'Unlock All';
 }

@@ -349,7 +349,7 @@
           <p class="evolve-subtitle">Master the AI skill tree</p>
           <div class="evolve-xp-bar">
             <div class="xp-fill"></div>
-            <span class="xp-text">2,450 / 3,000 XP</span>
+            <span class="xp-text">0 / 3,000 XP</span>
           </div>
         </div>
 
@@ -434,13 +434,13 @@
             <!-- Prompt Writing children -->
             <div class="tree-node locked" data-angle="-15" data-parent="0"
               data-tooltip="Complete Prompt Writing to unlock"
-              data-required="750 XP">
+              data-required="750 XP" data-icon="🧠">
               <div class="node-icon">🔒</div>
               <span class="node-label">Adv. Prompting</span>
             </div>
             <div class="tree-node locked" data-angle="15" data-parent="0"
               data-tooltip="Complete Prompt Writing to unlock"
-              data-required="900 XP">
+              data-required="900 XP" data-icon="🔗">
               <div class="node-icon">🔒</div>
               <span class="node-label">Chain-of-Thought</span>
             </div>
@@ -448,13 +448,13 @@
             <!-- Image Gen children -->
             <div class="tree-node locked" data-angle="45" data-parent="60"
               data-tooltip="Complete Image Gen to unlock"
-              data-required="800 XP">
+              data-required="800 XP" data-icon="🎬">
               <div class="node-icon">🔒</div>
               <span class="node-label">Video &amp; 3D</span>
             </div>
             <div class="tree-node locked" data-angle="75" data-parent="60"
               data-tooltip="Complete Image Gen to unlock"
-              data-required="850 XP">
+              data-required="850 XP" data-icon="🖌️">
               <div class="node-icon">🔒</div>
               <span class="node-label">Style Transfer</span>
             </div>
@@ -462,13 +462,13 @@
             <!-- Code Assist children -->
             <div class="tree-node locked" data-angle="105" data-parent="120"
               data-tooltip="Complete Code Assist to unlock"
-              data-required="1000 XP">
+              data-required="1000 XP" data-icon="⚙️">
               <div class="node-icon">🔒</div>
               <span class="node-label">Full Automation</span>
             </div>
             <div class="tree-node locked" data-angle="135" data-parent="120"
               data-tooltip="Complete Code Assist to unlock"
-              data-required="1200 XP">
+              data-required="1200 XP" data-icon="🤖">
               <div class="node-icon">🔒</div>
               <span class="node-label">AI Agents</span>
             </div>
@@ -476,13 +476,13 @@
             <!-- Data Analysis children -->
             <div class="tree-node locked" data-angle="165" data-parent="180"
               data-tooltip="Complete Data Analysis to unlock"
-              data-required="900 XP">
+              data-required="900 XP" data-icon="🎯">
               <div class="node-icon">🔒</div>
               <span class="node-label">AI Strategy</span>
             </div>
             <div class="tree-node locked" data-angle="195" data-parent="180"
               data-tooltip="Complete Data Analysis to unlock"
-              data-required="1100 XP">
+              data-required="1100 XP" data-icon="📈">
               <div class="node-icon">🔒</div>
               <span class="node-label">Predictive Models</span>
             </div>
@@ -490,13 +490,13 @@
             <!-- AI Writing children -->
             <div class="tree-node locked" data-angle="225" data-parent="240"
               data-tooltip="Complete AI Writing to unlock"
-              data-required="800 XP">
+              data-required="800 XP" data-icon="📢">
               <div class="node-icon">🔒</div>
               <span class="node-label">Content Marketing</span>
             </div>
             <div class="tree-node locked" data-angle="255" data-parent="240"
               data-tooltip="Complete AI Writing to unlock"
-              data-required="950 XP">
+              data-required="950 XP" data-icon="📖">
               <div class="node-icon">🔒</div>
               <span class="node-label">Creative Fiction</span>
             </div>
@@ -504,27 +504,33 @@
             <!-- AI Audio children -->
             <div class="tree-node locked" data-angle="285" data-parent="300"
               data-tooltip="Complete AI Audio to unlock"
-              data-required="850 XP">
+              data-required="850 XP" data-icon="🎹">
               <div class="node-icon">🔒</div>
               <span class="node-label">Music Production</span>
             </div>
             <div class="tree-node locked" data-angle="315" data-parent="300"
               data-tooltip="Complete AI Audio to unlock"
-              data-required="1000 XP">
+              data-required="1000 XP" data-icon="🗣️">
               <div class="node-icon">🔒</div>
               <span class="node-label">Voice Synthesis</span>
             </div>
           </div>
+
+          <!-- Unlock All Button -->
+          <button class="unlock-all-btn" aria-label="Unlock all skills">
+            <span class="unlock-btn-icon">⚡</span>
+            <span class="unlock-btn-text">Unlock All</span>
+          </button>
         </div>
 
         <!-- Stats Row -->
         <div class="evolve-stats">
           <div class="evolve-stat">
-            <span class="stat-number">6</span>
+            <span class="stat-number">0</span>
             <span class="stat-label">Skills Unlocked</span>
           </div>
           <div class="evolve-stat">
-            <span class="stat-number">82%</span>
+            <span class="stat-number">0%</span>
             <span class="stat-label">Completion</span>
           </div>
           <div class="evolve-stat">
