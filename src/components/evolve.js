@@ -3,10 +3,10 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const INNER_RADIUS = 180;
-const OUTER_RADIUS = 295;
-const TABLET_INNER = 140;
-const TABLET_OUTER = 230;
+const INNER_RADIUS = 125;
+const OUTER_RADIUS = 200;
+const TABLET_INNER = 120;
+const TABLET_OUTER = 190;
 const MOBILE_BREAKPOINT = 768;
 const TABLET_BREAKPOINT = 1024;
 
