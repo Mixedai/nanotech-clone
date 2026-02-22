@@ -1,9 +1,11 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TOOLS, CATEGORIES } from '../data/tools.js';
+import { fetchTools, buildCategories } from '../lib/tools-service.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
+let TOOLS = [];
+let CATEGORIES = [];
 let activeCategory = 'all';
 let activeSort = 'rating';
 let searchQuery = '';
@@ -12,7 +14,13 @@ let _carouselInterval = null;
 let _searchOverlayActive = false;
 let _searchOverlayIndex = -1;
 
-export function initToolsPage() {
+export async function initToolsPage() {
+  _showLoading();
+
+  TOOLS = await fetchTools();
+  CATEGORIES = buildCategories(TOOLS);
+
+  _hideLoading();
   _setDynamicStats();
   _renderCategories();
   _renderFeaturedCarousel();
@@ -29,6 +37,24 @@ export function initToolsPage() {
   _initSectionParallax();
   _initHeroSpotlight();
   _animateStats();
+}
+
+function _showLoading() {
+  const grid = document.getElementById('toolsGrid');
+  if (!grid) return;
+  grid.innerHTML = `
+    <div class="tools-loading">
+      <div class="tools-loading-spinner"></div>
+      <p>Loading AI tools...</p>
+    </div>
+  `;
+}
+
+function _hideLoading() {
+  const grid = document.getElementById('toolsGrid');
+  if (!grid) return;
+  const loader = grid.querySelector('.tools-loading');
+  if (loader) loader.remove();
 }
 
 /* ========== BATCH 1: Dynamic stats ========== */
@@ -91,7 +117,10 @@ function _renderFeaturedCarousel() {
   const container = document.getElementById('featuredCarousel');
   if (!container) return;
 
-  const featured = TOOLS.filter(t => t.featured);
+  let featured = TOOLS.filter(t => t.featured);
+  if (featured.length === 0) {
+    featured = [...TOOLS].sort((a, b) => b.rating - a.rating).slice(0, 6);
+  }
 
   container.innerHTML = featured.map(tool => `
     <div class="featured-tool-card" data-tool="${tool.id}" style="--card-glow: ${tool.color};">

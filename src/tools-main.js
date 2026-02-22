@@ -4,9 +4,9 @@ import gsap from 'gsap';
 import { initCursor } from './components/cursor.js';
 import { initToolsPage } from './pages/tools-page.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initCursor();
-  initToolsPage();
+  await initToolsPage();
 
   // BATCH 2: Coordinated hero entrance timeline
   const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });

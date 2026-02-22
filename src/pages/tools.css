@@ -1690,3 +1690,29 @@
     font-size: 0.8rem;
   }
 }
+
+/* ========== LOADING STATE ========== */
+.tools-loading {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+}
+
+.tools-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: rgba(120, 80, 255, 0.7);
+  border-radius: 50%;
+  animation: tools-spin 0.8s linear infinite;
+}
+
+@keyframes tools-spin {
+  to { transform: rotate(360deg); }
+}
