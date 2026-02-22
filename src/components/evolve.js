@@ -382,7 +382,7 @@ function _initScrollAnimations(section) {
 
   // Set initial hidden states explicitly (avoids GSAP from() + Lenis timing issues)
   gsap.set(title, { y: 30, opacity: 0, scale: 0.9 });
-  if (profileCard) gsap.set(profileCard, { x: -40, opacity: 0 });
+  if (profileCard) gsap.set(profileCard, { x: -340, opacity: 0 });
   if (subtitle) gsap.set(subtitle, { y: 20, opacity: 0 });
   if (xpBar) gsap.set(xpBar, { opacity: 0, scaleX: 0, transformOrigin: 'left center' });
   if (xpFill) gsap.set(xpFill, { width: '0%' });
@@ -414,7 +414,7 @@ function _initScrollAnimations(section) {
 
   // Profile card slides in from left
   if (profileCard) {
-    tl.to(profileCard, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.3');
+    tl.to(profileCard, { x: -300, opacity: 1, duration: 0.6, ease: 'power3.out' }, '-=0.3');
   }
 
   // Orbit rings fade in
