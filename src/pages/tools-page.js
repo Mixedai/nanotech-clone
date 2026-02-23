@@ -591,25 +591,7 @@ function _initViewToggle() {
 
 /* ========== BATCH 5: Sticky filter bar ========== */
 function _initStickyFilter() {
-  const filterBar = document.querySelector('.tools-filter-bar');
-  if (!filterBar) return;
-
-  // Sentinel element before filter bar
-  const sentinel = document.createElement('div');
-  sentinel.className = 'tools-filter-sentinel';
-  filterBar.parentNode.insertBefore(sentinel, filterBar);
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) {
-        filterBar.classList.add('is-stuck');
-      } else {
-        filterBar.classList.remove('is-stuck');
-      }
-    });
-  }, { threshold: 0 });
-
-  observer.observe(sentinel);
+  // Sticky filter removed — filter bar scrolls with content
 }
 
 /* ========== BATCH 6: Detail Modal with GSAP ========== */
