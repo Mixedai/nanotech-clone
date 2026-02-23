@@ -1716,3 +1716,11 @@
 @keyframes tools-spin {
   to { transform: rotate(360deg); }
 }
+
+/* Tool logo images */
+.tool-logo-img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+  border-radius: 6px;
+}

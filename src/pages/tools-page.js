@@ -126,7 +126,7 @@ function _renderFeaturedCarousel() {
     <div class="featured-tool-card" data-tool="${tool.id}" style="--card-glow: ${tool.color};">
       <span class="featured-badge" style="background: ${tool.color}20; color: ${tool.color};">Featured</span>
       <div class="featured-card-icon" style="background: linear-gradient(135deg, ${tool.color}, ${tool.color}aa);">
-        ${tool.icon}
+        ${tool.logoUrl ? `<img src="${tool.logoUrl}" alt="${tool.name}" class="tool-logo-img">` : tool.icon}
       </div>
       <h3 class="featured-card-name">${tool.name}</h3>
       <p class="featured-card-desc">${tool.description}</p>
@@ -413,7 +413,7 @@ function _renderTools() {
     <article class="tool-card" data-tool="${tool.id}" style="--card-glow: ${tool.color};">
       <div class="tool-card-header">
         <div class="tool-icon" style="background: ${tool.color}15; color: ${tool.color}; border-color: ${tool.color}30;">
-          ${tool.icon}
+          ${tool.logoUrl ? `<img src="${tool.logoUrl}" alt="${tool.name}" class="tool-logo-img">` : tool.icon}
         </div>
         <div class="tool-meta">
           ${_buildStarRating(tool.rating)}
@@ -643,7 +643,11 @@ function _openModal(toolId) {
   // Populate content
   const iconEl = document.getElementById('modalIcon');
   iconEl.style.background = `linear-gradient(135deg, ${tool.color}, ${tool.color}aa)`;
-  iconEl.textContent = tool.icon;
+  if (tool.logoUrl) {
+    iconEl.innerHTML = `<img src="${tool.logoUrl}" alt="${tool.name}" class="tool-logo-img">`;
+  } else {
+    iconEl.textContent = tool.icon;
+  }
 
   document.getElementById('modalName').textContent = tool.name;
   // Star rating in modal (Batch 6)
@@ -672,7 +676,7 @@ function _openModal(toolId) {
   relatedGrid.innerHTML = related.map(r => `
     <div class="related-tool-card" data-tool="${r.id}">
       <div class="related-tool-icon" style="background: linear-gradient(135deg, ${r.color}, ${r.color}aa);">
-        ${r.icon}
+        ${r.logoUrl ? `<img src="${r.logoUrl}" alt="${r.name}" class="tool-logo-img">` : r.icon}
       </div>
       <div class="related-tool-name">${r.name}</div>
       <div class="related-tool-rating">\u2605 ${r.rating}</div>
@@ -846,7 +850,7 @@ function _renderSearchResults(query) {
   results.innerHTML = displayed.map((tool, i) => `
     <div class="search-result-item ${i === 0 ? 'active' : ''}" data-tool="${tool.id}">
       <div class="search-result-icon" style="background: linear-gradient(135deg, ${tool.color}, ${tool.color}aa);">
-        ${tool.icon}
+        ${tool.logoUrl ? `<img src="${tool.logoUrl}" alt="${tool.name}" class="tool-logo-img">` : tool.icon}
       </div>
       <div class="search-result-info">
         <div class="search-result-name">${tool.name}</div>

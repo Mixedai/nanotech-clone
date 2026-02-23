@@ -129,6 +129,7 @@ function _mapTool(row) {
     url: row.website,
     features: _extractFeatures(row.detailed_features, row.features),
     featured: row.is_featured === true,
+    logoUrl: row.logo_url || null,
   };
 }
 
@@ -140,7 +141,7 @@ export async function fetchTools() {
   try {
     const { data, error } = await supabase
       .from('tools')
-      .select('slug, name, category, description, rating, users, price, features, icon, gradient, is_featured, website, pricing, detailed_features')
+      .select('slug, name, category, description, rating, users, price, features, icon, gradient, is_featured, website, pricing, detailed_features, logo_url')
       .order('rating', { ascending: false });
 
     if (error) throw error;
@@ -183,7 +184,7 @@ export async function fetchToolById(slug) {
   try {
     const { data, error } = await supabase
       .from('tools')
-      .select('slug, name, category, description, rating, users, price, features, icon, gradient, is_featured, website, pricing, detailed_features')
+      .select('slug, name, category, description, rating, users, price, features, icon, gradient, is_featured, website, pricing, detailed_features, logo_url')
       .eq('slug', slug)
       .single();
 
@@ -203,7 +204,7 @@ export async function fetchToolsByCategory(category) {
   try {
     const { data, error } = await supabase
       .from('tools')
-      .select('slug, name, category, description, rating, users, price, features, icon, gradient, is_featured, website, pricing, detailed_features')
+      .select('slug, name, category, description, rating, users, price, features, icon, gradient, is_featured, website, pricing, detailed_features, logo_url')
       .eq('category', category)
       .order('rating', { ascending: false });
 
